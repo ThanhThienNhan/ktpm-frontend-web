@@ -6,6 +6,7 @@ import AdminUserManagement from "./pages/AdminUserManagement/AdminUserManagement
 import AdminGameManagement from "./pages/AdminGameManagement/AdminGameManagement";
 // Layouts
 import Admin from "./Layouts/Admin/Admin";
+import Brand from "./Layouts/Brand/Brand"
 function App() {
   return (
     <>
@@ -22,6 +23,8 @@ function App() {
             element={<AdminGameManagement />}
           />
         </Route>
+        {/*Brand*/}
+        <Route path="/" element={<Brand/>}></Route>
       </Routes>
     </>
   );
