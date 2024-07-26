@@ -2,7 +2,6 @@ import React from 'react';
 
 import "./UserTableView.css";
 
-
 export default function UserTableView(props){
     const {data,onDelete, onEdit} = props;
 
@@ -30,7 +29,7 @@ export default function UserTableView(props){
                 <td>{user.role}</td>
                 <td>{user.status}</td>
                 <td className='Button--container'>
-                  <button className='Button' onClick={() => onEdit(user)}>Edit</button>
+                  <button className='Button' onClick={() => onEdit(user.username)}>Edit</button>
                   <button className='Button' onClick={() => onDelete(user.username)}>Delete</button>
                 </td>
               </tr>
@@ -38,6 +37,5 @@ export default function UserTableView(props){
           </tbody>
         </table>
       </div>
-        
     )
 }

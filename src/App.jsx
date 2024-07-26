@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import AdminUserManagement from "./pages/AdminUserManagement/AdminUserManagement";
 import AdminGameManagement from "./pages/AdminGameManagement/AdminGameManagement";
+import EditUser from "./pages/AdminUserManagement/EditUser";
+import EditGame from "./pages/AdminGameManagement/EditGame";
 // Layouts
 import Admin from "./Layouts/Admin/Admin";
 import Brand from "./Layouts/Brand/Brand"
@@ -19,8 +21,25 @@ function App() {
             element={<AdminUserManagement />}
           />
           <Route
+            path="/admin/user-management/:username"
+            element={<EditUser />}
+          />
+          <Route
+            path="/admin/user-management/new"
+            element={<EditUser />}
+          />
+          
+          <Route
             path="/admin/game-management"
             element={<AdminGameManagement />}
+          />
+          <Route
+            path="admin/game-management/:id"
+            element={<EditGame />}
+          />
+          <Route
+            path="/admin/game-management/new"
+            element={<EditGame />}
           />
         </Route>
         {/*Brand*/}
