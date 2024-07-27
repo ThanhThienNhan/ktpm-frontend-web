@@ -6,9 +6,13 @@ import AdminUserManagement from "./pages/AdminUserManagement/AdminUserManagement
 import AdminGameManagement from "./pages/AdminGameManagement/AdminGameManagement";
 import EditUser from "./pages/AdminUserManagement/EditUser";
 import EditGame from "./pages/AdminGameManagement/EditGame";
+
+//Brand
+import BrandEvents from "./pages/BrandEvents/BrandEvents"
 // Layouts
 import Admin from "./Layouts/Admin/Admin";
 import Brand from "./Layouts/Brand/Brand"
+import BrandReports from "./pages/BrandReports/BrandReports";
 function App() {
   return (
     <>
@@ -28,7 +32,7 @@ function App() {
             path="/admin/user-management/new"
             element={<EditUser />}
           />
-          
+
           <Route
             path="/admin/game-management"
             element={<AdminGameManagement />}
@@ -43,7 +47,10 @@ function App() {
           />
         </Route>
         {/*Brand*/}
-        <Route path="/" element={<Brand/>}></Route>
+        <Route path="/" element={<Brand />}>
+          <Route index element={<BrandEvents />} />
+          <Route path="/reports" element={<BrandReports />} />
+        </Route>
       </Routes>
     </>
   );

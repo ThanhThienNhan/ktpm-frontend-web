@@ -55,7 +55,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                 BRAND
             </Link>
             <nav className="brand-nav">
-                <Link to="/events">Events</Link>
+                <Link to="/">Events</Link>
                 <Link to="/reports">Reports</Link>
             </nav>
             <div className="search-box">

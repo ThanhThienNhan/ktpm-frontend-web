@@ -1,0 +1,29 @@
+.pagination-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+  }
+  
+  .pagination-container select {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 5px; 
+    height: auto; 
+  }
+  
+  .pagination-container select:focus {
+    outline: none;
+    border-color: #888;
+  }
+  
+  .pagination-container span {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0 5px; 
+  }
+  
