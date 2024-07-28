@@ -58,30 +58,4 @@
     color: #fff;
     border-radius: 50%;
     padding: 5px;
-  }.container {
-    padding: 20px;
-  }
-  
-  .header {
-    display: grid;
-    grid-template-columns: 50px 150px 1fr 50px;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .header strong {
-    text-align: center;
-  }
-  
-  .header strong:nth-child(1),
-  .header strong:nth-child(4) {
-    width: 50px;
-  }
-  
-  .header strong:nth-child(2) {
-    width: 150px;
-  }
-  
-  .header strong:nth-child(3) {
-    flex: 1;
   }

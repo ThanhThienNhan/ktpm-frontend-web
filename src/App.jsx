@@ -9,6 +9,7 @@ import EditGame from "./pages/AdminGameManagement/EditGame";
 
 //Brand
 import BrandEvents from "./pages/BrandEvents/BrandEvents"
+import AddEvent from "./pages/BrandEvents/AddEvent";
 // Layouts
 import Admin from "./Layouts/Admin/Admin";
 import Brand from "./Layouts/Brand/Brand"
@@ -49,6 +50,7 @@ function App() {
         {/*Brand*/}
         <Route path="/" element={<Brand />}>
           <Route index element={<BrandEvents />} />
+          <Route path="/new" element={<AddEvent/>}/>
           <Route path="/reports" element={<BrandReports />} />
         </Route>
       </Routes>
