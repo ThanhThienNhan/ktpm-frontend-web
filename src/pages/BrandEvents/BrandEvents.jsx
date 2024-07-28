@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EventShelf from "../../../components/EventShelf";
 import BrandPagination from "../../../components/BrandPagination";
+import "./BrandEvents.css"
 
 
 const events = [
@@ -88,9 +89,17 @@ const BrandEvents = () => {
     return (
         <div>
             <h2>New Event</h2>
-            <EventShelf 
-                events={selectedEvents} 
-                currentPage={currentPage} 
+
+           
+            <div className="brand-events-add-button-container">
+                <button className="brand-events-add-button">
+                    Add a Event
+                </button>
+            </div>
+
+            <EventShelf
+                events={selectedEvents}
+                currentPage={currentPage}
                 eventsPerPage={eventsPerPage}
                 onPageChange={handlePageChange}
             />
