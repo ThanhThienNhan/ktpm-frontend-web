@@ -1,0 +1,59 @@
+.report-detail-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .report-detail-image {
+    width: 100%;
+    border-radius: 24px;
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .report-detail-info {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .report-detail-name {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .report-detail-players,
+  .report-detail-vouchers {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+  }
+  
+  .report-detail-table-container {
+    width: 100%;
+    max-width: 800px;
+    margin-top: 20px;
+  }
+  
+  .report-detail-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .report-detail-table th,
+  .report-detail-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .report-detail-table th {
+    background-color: #f2f2f2;
+  }
+  

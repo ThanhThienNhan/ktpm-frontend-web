@@ -1,0 +1,67 @@
+.event-detail-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-detail-image {
+    width: 100%;
+    border-radius: 24px;
+    max-width: 500px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.event-detail-info {
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.event-detail-info-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.event-name {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.event-detail-type,
+.event-detail-vouchers,
+.event-detail-dates {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.event-detail-edit-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    align-self: flex-end;
+}
+
+.event-detail-edit-button:hover {
+    background-color: #0056b3;
+}
+
+.event-detail-edit-button svg {
+    margin-right: 10px;
+}
