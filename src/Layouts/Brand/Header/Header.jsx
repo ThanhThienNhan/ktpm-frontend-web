@@ -79,7 +79,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                     >
                         {showAvtDropdown && (
                             <div className="dropdown-menu" id="avt-dropdown">
-                                <Link to="/user">Profile</Link>
+                                <Link to="/brand-info">Profile</Link>
                                 
                                 <hr />
                                 <Link onClick={logOut}>
