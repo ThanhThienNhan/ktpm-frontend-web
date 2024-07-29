@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import EventShelf from "../../../components/EventShelf";
 import BrandPagination from "../../../components/BrandPagination";
+import { useNavigate } from "react-router-dom";
 import "./BrandEvents.css"
 
 
@@ -74,6 +75,7 @@ const events = [
     },
 ];
 
+
 const BrandEvents = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 8;
@@ -86,13 +88,22 @@ const BrandEvents = () => {
     const startIndex = (currentPage - 1) * eventsPerPage;
     const selectedEvents = events.slice(startIndex, startIndex + eventsPerPage);
 
+    const navigate = useNavigate();
+
+    const handleAddEventClick = () => {
+        navigate('/new');
+    };
+    
+
     return (
         <div>
             <h2>New Event</h2>
 
            
             <div className="brand-events-add-button-container">
-                <button className="brand-events-add-button">
+                <button 
+                className="brand-events-add-button"
+                onClick={handleAddEventClick}>
                     Add a Event
                 </button>
             </div>

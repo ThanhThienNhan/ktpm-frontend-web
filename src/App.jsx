@@ -14,6 +14,7 @@ import BrandEventDetail from "./pages/BrandEventDetail/BrandEventDetail"
 import BrandReportDetail from "./pages/BrandReportDetail/BrandReportDetail"
 
 import AddEvent from "./pages/BrandEvents/AddEvent";
+import BrandInfo from "./pages/BrandInfo/BrandInfo"
 
 // Layouts
 import Admin from "./Layouts/Admin/Admin";
@@ -59,6 +60,7 @@ function App() {
           <Route path="/reports" element={<BrandReports />} />
           <Route path="/event/:id" element={<BrandEventDetail/>}/>
           <Route path="/report/:id" element={<BrandReportDetail/>}/>
+          <Route path="/brand-info" element={<BrandInfo/>}/>
         </Route>
       </Routes>
     </>
