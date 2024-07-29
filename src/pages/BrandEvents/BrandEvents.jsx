@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import EventShelf from "../../../components/EventShelf";
 import BrandPagination from "../../../components/BrandPagination";
 import { useNavigate } from "react-router-dom";
@@ -77,6 +78,7 @@ const events = [
 
 
 const BrandEvents = () => {
+    let navigate = useNavigate();
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 8;
     const totalPages = Math.ceil(events.length / eventsPerPage);

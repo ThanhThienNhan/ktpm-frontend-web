@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import { useDropzone } from 'react-dropzone';
 
 import "./AddEvent.css"
+import Dropzone from "../../../components/Dropzone";
 
 
 const events = [
@@ -14,6 +14,7 @@ const events = [
         startDate: "18:00 13/08/2024",
         endDate: "20:00 13/08/2024",
     }];
+
 
 const AddEvent = () => {
 
@@ -27,42 +28,9 @@ const AddEvent = () => {
         numberOfVouchers: Yup.number().required('Required'),
       });
 
-      const FileUpload = ({ field ,setFieldValue }) => {
-        const onDrop = React.useCallback((acceptedFiles) => {
-          const file = acceptedFiles[0];
-          const reader = new FileReader();
-        
-          reader.onloadend = () => {
-            const base64data = reader.result;  
-            setFieldValue(() => base64data);
-            // Now base64data holds the content of the image file as a base64 encoded string
-            // You can set it as the src of an img element to display the image
-            //const imgTag = document.getElementById('DroppedImage');
-            //if (imgTag !== null) {
-            //  imgTag.src = base64data;
-            //} 
-          };
-        
-          reader.readAsDataURL(file);     
-    
-          //setFieldValue("file", acceptedFiles[0]);
-        }, []); //[setFieldValue]
-      
-        const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-      
-        return (
-          <div {...getRootProps()} className="dropzone">
-          <input {...getInputProps()} />
-            {field === undefined &&
-              <div className="dropzone-content">
-                <div className="icon">🖼️</div>
-                <p>Drop Image Here, Paste Or</p>
-                <button type="button" className="select-button">Select</button>
-              </div>}
-            <img className='Image-display' id='DroppedImage' src={field}></img>
-        </div>
-        );
-      };
+    if(imageFile){
+        console.log(imageFile);
+    }
 
     return (
         <div>
@@ -108,15 +76,12 @@ const AddEvent = () => {
                         <Field type="number" name="numberOfVouchers" placeholder="Number Of Vouchers" />
                     </div>
                     <div></div>
-                    <FileUpload field={imageFile} setFieldValue={setImageFile}/>
+                    <Dropzone field={imageFile} setFieldValue={setImageFile}/>
                     <div></div>
                     <div className="Button-container">
                         <button type="submit" className="submit-button">+ Add Event</button>
                     </div>
-                    
                 </div>
-                
-                
               </Form>
             </Formik>
         </div>
