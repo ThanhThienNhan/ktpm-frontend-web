@@ -14,6 +14,7 @@ import BrandEventDetail from "./pages/BrandEventDetail/BrandEventDetail"
 import BrandReportDetail from "./pages/BrandReportDetail/BrandReportDetail"
 
 import AddEvent from "./pages/BrandEvents/AddEvent";
+import EditEvent from "./pages/BrandEvents/EditEvent";
 
 // Layouts
 import Admin from "./Layouts/Admin/Admin";
@@ -56,6 +57,7 @@ function App() {
         <Route path="/" element={<Brand />}>
           <Route index element={<BrandEvents />} />
           <Route path="/new" element={<AddEvent/>}/>
+          <Route path="/edit/:id" element={<EditEvent/>}/>
           <Route path="/reports" element={<BrandReports />} />
           <Route path="/event/:id" element={<BrandEventDetail/>}/>
           <Route path="/report/:id" element={<BrandReportDetail/>}/>
