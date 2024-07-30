@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { useDropzone } from 'react-dropzone';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import {useParams} from "react-router-dom";
 
 import "./style.css";
+import Dropzone from '../../../components/Dropzone';
 
 function EditGame() {
   const {gameId} = useParams();
@@ -37,43 +37,6 @@ function EditGame() {
   function setFieldValue(fieldName, file){
     console.log(file);
   }
-
-  const FileUpload = ({ field ,setFieldValue }) => {
-    const onDrop = React.useCallback((acceptedFiles) => {
-      const file = acceptedFiles[0];
-      const reader = new FileReader();
-    
-      reader.onloadend = () => {
-        const base64data = reader.result;  
-        setFieldValue(() => base64data);
-        // Now base64data holds the content of the image file as a base64 encoded string
-        // You can set it as the src of an img element to display the image
-        //const imgTag = document.getElementById('DroppedImage');
-        //if (imgTag !== null) {
-        //  imgTag.src = base64data;
-        //} 
-      };
-    
-      reader.readAsDataURL(file);     
-
-      //setFieldValue("file", acceptedFiles[0]);
-    }, []); //[setFieldValue]
-  
-    const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
-  
-    return (
-      <div {...getRootProps()} className="dropzone">
-      <input {...getInputProps()} />
-        {field === undefined &&
-          <div className="dropzone-content">
-            <div className="icon">🖼️</div>
-            <p>Drop Image Here, Paste Or</p>
-            <button type="button" className="select-button">Select</button>
-          </div>}
-        <img className='Image-display' id='DroppedImage' src={field}></img>
-    </div>
-    );
-  };
 
   validationSchema = Yup.object({
     name: Yup.string().required('Required'),
@@ -122,7 +85,7 @@ function EditGame() {
               <ErrorMessage name="instruction" component="div" />
             </div>
             
-            <FileUpload setFieldValue={setImageFile} field={imageFile}/>
+            <Dropzone field={imageFile} setFieldValue={setImageFile}/>
             
             <div>
               <button type="submit" disabled={isSubmitting} className="submit-button">Save</button>
