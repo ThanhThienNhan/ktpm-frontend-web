@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
+//Authentication
+import Authentication from "./pages/Authentication/Authentication";
+
 // Admin
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import AdminUserManagement from "./pages/AdminUserManagement/AdminUserManagement";
@@ -29,6 +32,17 @@ function App() {
   return (
     <>
       <Routes>
+        {/* Authentication */}
+        <Route path="/authentication">
+          <Route
+            path="/authentication/login"
+            element={<Authentication authenType={"Login"} />}
+          />
+          <Route
+            path="/authentication/register"
+            element={<Authentication authenType={"Register"} />}
+          />
+        </Route>
         {/* Admin */}
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -62,15 +76,14 @@ function App() {
         <Route path="/" element={<Brand />}>
           <Route index element={<BrandEvents />} />
           <Route path="/new" element={<AddEvent/>}/>
-
           <Route path="/search/:word" element={<BrandSearchEvents />} />
 
           <Route path="/edit/:id" element={<EditEvent/>}/>
 
           <Route path="/reports" element={<BrandReports />} />
-          <Route path="/event/:id" element={<BrandEventDetail/>}/>
-          <Route path="/report/:id" element={<BrandReportDetail/>}/>
-          <Route path="/brand-info" element={<BrandInfo/>}/>
+          <Route path="/event/:id" element={<BrandEventDetail />} />
+          <Route path="/report/:id" element={<BrandReportDetail />} />
+          <Route path="/brand-info" element={<BrandInfo />} />
         </Route>
       </Routes>
     </>
