@@ -56,3 +56,11 @@
     font-weight: 600;
     color: #3E3232;
   }
+
+  select {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 4px;
+    height: 50px;
+    width: 100%;
+}

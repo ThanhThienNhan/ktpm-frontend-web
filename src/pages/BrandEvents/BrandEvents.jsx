@@ -89,8 +89,12 @@ const BrandEvents = () => {
     const startIndex = (currentPage - 1) * eventsPerPage;
     const selectedEvents = events.slice(startIndex, startIndex + eventsPerPage);
 
-    const handleAddEventClick = () => {
-        navigate('/new');
+    const handleCreateEventClick = () => {
+        navigate('/create-event');
+    };
+
+    const handleCreateVoucherClick = () => {
+        navigate('/create-voucher');
     };
     
 
@@ -99,11 +103,17 @@ const BrandEvents = () => {
             <h2>New Events</h2>
 
            
-            <div className="brand-events-add-button-container">
+            <div className="brand-events-create-button-container">
+            <button 
+                className="brand-events-create-button"
+                onClick={handleCreateVoucherClick}>
+                    Create a Voucher
+                </button>
+
                 <button 
-                className="brand-events-add-button"
-                onClick={handleAddEventClick}>
-                    Add an Event
+                className="brand-events-create-button"
+                onClick={handleCreateEventClick}>
+                    Create an Event
                 </button>
             </div>
 

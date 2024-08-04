@@ -17,6 +17,7 @@ import BrandEventDetail from "./pages/BrandEventDetail/BrandEventDetail"
 import BrandReportDetail from "./pages/BrandReportDetail/BrandReportDetail"
 
 import AddEvent from "./pages/BrandEvents/AddEvent";
+import AddVoucher from "./pages/BrandEvents/AddVoucher";
 
 import EditEvent from "./pages/BrandEvents/EditEvent";
 
@@ -75,7 +76,8 @@ function App() {
         {/*Brand*/}
         <Route path="/" element={<Brand />}>
           <Route index element={<BrandEvents />} />
-          <Route path="/new" element={<AddEvent/>}/>
+          <Route path="/create-event" element={<AddEvent/>}/>
+          <Route path="/create-voucher" element={<AddVoucher/>}/>
           <Route path="/search/:word" element={<BrandSearchEvents />} />
 
           <Route path="/edit/:id" element={<EditEvent/>}/>
