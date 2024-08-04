@@ -33,6 +33,7 @@
   .report-detail-vouchers {
     font-size: 1.2rem;
     margin-bottom: 8px;
+    border: none;
   }
   
   .report-detail-table-container {

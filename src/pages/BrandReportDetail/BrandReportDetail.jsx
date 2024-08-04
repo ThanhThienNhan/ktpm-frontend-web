@@ -12,29 +12,22 @@ const report = {
 };
 
 const fakeData = [
-  { username: "user1", playTime: 30 },
-  { username: "user2", playTime: 60 },
-  { username: "user3", playTime: 45 },
-  { username: "user4", playTime: 150 },
-  { username: "user5", playTime: 90 },
-  { username: "user6", playTime: 35 },
-  { username: "user7", playTime: 20 },
-  { username: "user8", playTime: 120 },
-  { username: "user9", playTime: 10 },
-  { username: "user10", playTime: 240 },
+  { username: "user1", points: 30 },
+  { username: "user2", points: 60 },
+  { username: "user3", points: 45 },
+  { username: "user4", points: 150 },
+  { username: "user5", points: 90 },
+  { username: "user6", points: 35 },
+  { username: "user7", points: 20 },
+  { username: "user8", points: 120 },
+  { username: "user9", points: 10 },
+  { username: "user10", points: 240 },
 ];
 
-function formatPlayTime(minutes) {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  return `${hours}h${mins < 10 ? '0' : ''}${mins}m`;
-}
 
 function BrandReportDetail() {
   const { id } = useParams();
   const currentReport = report; // This will be fetched  based on the ID
-
-  const sortedData = [...fakeData].sort((a, b) => b.playTime - a.playTime);
 
   return (
     <div className="report-detail-container">
@@ -51,14 +44,14 @@ function BrandReportDetail() {
           <thead>
             <tr>
               <th>Username</th>
-              <th>Play Time</th>
+              <th>Points</th>
             </tr>
           </thead>
           <tbody>
-            {sortedData.map((data, index) => (
+            {fakeData.map((data, index) => (
               <tr key={index}>
                 <td>{data.username}</td>
-                <td>{formatPlayTime(data.playTime)}</td>
+                <td>{data.points}</td>
               </tr>
             ))}
           </tbody>
