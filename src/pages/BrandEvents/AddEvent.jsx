@@ -45,17 +45,17 @@ const AddEvent = () => {
                     </div>
 
                     <div>
-                        <label className="Field--label">Start date</label>
-                        <Field type="date" name="startDate" placeholder="Start Date" />
+                        <label className="Field--label">Start Date and Time</label>
+                        <Field type="datetime-local" name="startDate" placeholder="Start Date and Time" />
                     </div>
 
                     <div>
-                        <label className="Field--label">End date</label>
-                        <Field type="date" name="endDate" placeholder="End Date" />
+                        <label className="Field--label">End Date and Time</label>
+                        <Field type="datetime-local" name="endDate" placeholder="End Date and Time" />
                     </div>
 
                     <div>
-                        <label className="Field--label">Game type</label>
+                        <label className="Field--label">Game Type</label>
                         <Field as="select" name="gameType">
                             <option value="Trivial Quiz" label="Trivial Quiz" />
                             <option value="Roll Dice" label="Roll Dice" />

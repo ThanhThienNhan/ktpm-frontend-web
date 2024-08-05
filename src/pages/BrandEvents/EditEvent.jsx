@@ -3,20 +3,17 @@ import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import { useParams } from "react-router-dom";
 
-import "./AddEvent.css"
+import "./AddEvent.css";
 import Dropzone from "../../../components/Dropzone";
 import sampleImage from "./sampleImage";
 
-
-const events =
-{
+const events = {
     image: "https://via.placeholder.com/280x190",
     name: "Saturday Quiz",
     type: "Realtime Quiz",
-    startDate: "2024-08-24",
-    endDate: "2024-08-24",
+    startDate: "2024-08-24T14:00",
+    endDate: "2024-08-24T16:00",   
 };
-
 
 const EditEvent = () => {
     const { id } = useParams();
@@ -32,15 +29,14 @@ const EditEvent = () => {
         numberOfVouchers: Yup.number().required('Required'),
     });
 
-
     useEffect(() => {
-        //fetch data
+        // Fetch data
         setEventData(events);
 
-        //fetch image
+        // Fetch image
         const fetchedImage = sampleImage;
         setImageFile(fetchedImage);
-    }, [eventData])
+    }, []);
 
     return (
         <div>
@@ -67,28 +63,28 @@ const EditEvent = () => {
                             </div>
 
                             <div>
-                                <label className="Field--label">Start date</label>
-                                <Field type="date" name="startDate" placeholder="Start Date" />
+                                <label className="Field--label">Start Date and Time</label>
+                                <Field type="datetime-local" name="startDate" />
                             </div>
 
                             <div>
-                                <label className="Field--label">End date</label>
-                                <Field type="date" name="endDate" placeholder="End Date" />
+                                <label className="Field--label">End Date and Time</label>
+                                <Field type="datetime-local" name="endDate" />
                             </div>
 
                             <div>
-                                <label className="Field--label">Game type</label>
+                                <label className="Field--label">Game Type</label>
                                 <Field as="select" name="gameType">
-                                    <option value="Trivial Quiz" label="Trivial Quiz" />
-                                    <option value="Roll Dice" label="Roll Dice" />
+                                    <option value="Trivial Quiz">Trivial Quiz</option>
+                                    <option value="Roll Dice">Roll Dice</option>
                                 </Field>
                             </div>
-
 
                             <div>
                                 <label className="Field--label">Number Of Vouchers</label>
                                 <Field type="number" name="numberOfVouchers" placeholder="Number Of Vouchers" />
                             </div>
+
                             <div></div>
                             <Dropzone field={imageFile} setFieldValue={setImageFile} />
                             <div></div>
@@ -99,7 +95,6 @@ const EditEvent = () => {
                     </Form>
                 </Formik>
             }
-
         </div>
     );
 };

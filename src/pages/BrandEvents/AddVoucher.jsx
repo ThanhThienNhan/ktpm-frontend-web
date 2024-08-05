@@ -35,8 +35,8 @@ const AddVoucher = () => {
                 <Form className="form-container">
                     <div className="Input-grid">
                         <div>
-                            <label className="Field--label">Expiration Date</label>
-                            <Field type="date" name="expirationDate" placeholder="Expiration Date" />
+                            <label className="Field--label">Expiration Date and Time</label>
+                            <Field type="datetime-local" name="expirationDate" placeholder="Expiration Date and Time" />
                         </div>
 
                         <div>
