@@ -10,10 +10,10 @@ export default function UserTableView(props){
         <table className="user-table">
           <thead>
             <tr>
-              <th>Name</th>
               <th>Username</th>
               <th>Email</th>
               <th>Phone</th>
+              <th>Gender</th>
               <th>Role</th>
               <th>Status</th>
               <th>Actions</th>
@@ -22,15 +22,15 @@ export default function UserTableView(props){
           <tbody>
             {data.map((user, index) => (
               <tr key={index}>
-                <td>{user.name}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.phone}</td>
-                <td>{user.role}</td>
-                <td>{user.status}</td>
+                <td>{user.TENDANGNHAP}</td>
+                <td>{user.EMAIL}</td>
+                <td>{user.SDT}</td>
+                <td>{user.GIOITINH === 0 ? "Male" : "Female"}</td>
+                <td>{user.VAITRO}</td>
+                <td>{user.TRANGTHAI}</td>
                 <td className='Button--container'>
-                  <button className='Button' onClick={() => onEdit(user.username)}>Edit</button>
-                  <button className='Button' onClick={() => onDelete(user.username)}>Delete</button>
+                  <button className='Button' onClick={() => onEdit(user.ID_TTNGUOIDUNG)}>Edit</button>
+                  <button className='Button' onClick={() => onDelete(user.ID_TTNGUOIDUNG)}>Delete</button>
                 </td>
               </tr>
             ))}

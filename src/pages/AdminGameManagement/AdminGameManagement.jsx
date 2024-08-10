@@ -13,7 +13,14 @@ function AdminGameManagement() {
   const totalPages = 10;
 
   const data = [
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
+    {
+      id: 1, 
+      name: "Trivia Blast", 
+      type: "Trivia Quiz", 
+      exchangable: "No", 
+      instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
+      imageFile: ""
+    },
     {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
     {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
     {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},

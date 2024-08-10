@@ -7,9 +7,10 @@ import axios from 'axios';
 import "./EditUser.css"
 import Dropzone from '../../../components/Dropzone';
 
-export default function EditUser() {
-  let navigate = useNavigate();
-  const { username } = useParams();
+export default function AddUser() {
+    let navigate = useNavigate();
+  const [imageFile, setImageFile] = React.useState();
+
   const [initialValues, setInitialValues] = useState({
     TENDANGNHAP: '',
     VAITRO: 'Player',
@@ -18,28 +19,6 @@ export default function EditUser() {
     MATKHAU: '',
     TRANGTHAI: 'Active',
   });
-  const [imageFile, setImageFile] = useState();
-
-  useEffect(() => {
-    // Fetch data from API
-    if (username) {
-      axios.get(`http://localhost:3001/v1/api/auth/users/info/${username}`)
-        .then(response => {
-          const userData = response.data;
-          setInitialValues({
-            TENDANGNHAP: userData.TENDANGNHAP,
-            VAITRO: userData.VAITRO,
-            SDT: userData.SDT,
-            EMAIL: userData.EMAIL,
-            MATKHAU: userData.MATKHAU,
-            TRANGTHAI: userData.TRANGTHAI,
-          });
-        })
-        .catch(error => {
-          console.error('Error fetching user data:', error);
-        });
-    }//
-  }, [username]);
 
   const validationSchema = Yup.object({
     TENDANGNHAP: Yup.string().required('Required'),
@@ -52,20 +31,18 @@ export default function EditUser() {
 
   const onSubmit = (values) => {
     const data = JSON.stringify(values);
-    axios.put(`http://localhost:3001/v1/api/auth/users/edit/${username}`, data, {
+    axios.post('http://localhost:3001/v1/api/auth/users/new', data, {
       headers: {
         'Content-Type': 'application/json'
       }
     })
     .then((response) => {
-      console.log("User data updated successfully!", response.data);
-      navigate("/admin/user-management/");
+      console.log("Submitted!", response.data);
+      navigate("/admin/user-management");
     })
     .catch((error) => {
-      console.error("There was an error updating the user data!", error);
+      console.error("There was an error submitting the form!", error);
     });
-
-    navigate("/admin/user-management/");
   };
 
   return (

@@ -24,6 +24,7 @@ import BrandInfo from "./pages/BrandInfo/BrandInfo"
 import Admin from "./Layouts/Admin/Admin";
 import Brand from "./Layouts/Brand/Brand"
 import BrandReports from "./pages/BrandReports/BrandReports";
+import AddUser from "./pages/AdminUserManagement/AddUser";
 function App() {
   return (
     <>
@@ -36,12 +37,12 @@ function App() {
             element={<AdminUserManagement />}
           />
           <Route
-            path="/admin/user-management/:username"
+            path="/admin/user-management/edit/:username"
             element={<EditUser />}
           />
           <Route
             path="/admin/user-management/new"
-            element={<EditUser />}
+            element={<AddUser />}
           />
 
           <Route

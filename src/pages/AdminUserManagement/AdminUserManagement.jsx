@@ -1,5 +1,6 @@
 import React from 'react'
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 import "../../index.css"
 
@@ -32,14 +33,32 @@ function AdminUserManagement() {
 
   const [users, setUsers] = React.useState(usersData);
 
+  React.useEffect(() => {
+    axios.get(`http://localhost:3001/v1/api/auth/users/`).then((response) => {
+      setUsers(response.data);
+    })
+  },[])
+
   function deleteUser(username){
-    setUsers((oldUsers) => oldUsers.filter((user) => user.username !== username));
-    //Detele on database
+    setUsers((oldUsers) => oldUsers.filter((user) => user.ID_TTNGUOIDUNG !== username));
+
+    axios.delete(`http://localhost:3001/v1/api/auth/users/${username}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then((response) => {
+      console.log("User deleted successfully!", response.data);
+      setUsers((oldUsers) => oldUsers.filter((user) => user.username !== username));
+    })
+    .catch((error) => {
+      console.error("There was an error deleting the user!", error);
+    });
+    
   }
 
   function editUser(username){
-    //do sth
-    navigate(`/admin/user-management/${username}`);
+    navigate(`/admin/user-management/edit/${username}`);
   }
 
   function changePage(number){
