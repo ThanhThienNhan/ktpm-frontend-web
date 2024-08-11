@@ -89,12 +89,14 @@ const BrandEvents = () => {
     const startIndex = (currentPage - 1) * eventsPerPage;
     const selectedEvents = events.slice(startIndex, startIndex + eventsPerPage);
 
+
     const handleCreateEventClick = () => {
         navigate('/create-event');
     };
 
     const handleCreateVoucherClick = () => {
         navigate('/create-voucher');
+
     };
     
 
