@@ -2,23 +2,11 @@ import React, { useState } from "react";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 
-import "./AddEvent.css"
+import "./AddEvent.css";
 import Dropzone from "../../../components/Dropzone";
 
-
-const events = [
-    {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Realtime Quiz",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
-    }];
-
-
 const AddEvent = () => {
-
-    const [imageFile,setImageFile] = useState(undefined);
+    const [imageFile, setImageFile] = useState(undefined);
     
     const validationSchema = Yup.object({
         name: Yup.string().required('Required'),
@@ -26,9 +14,9 @@ const AddEvent = () => {
         endDate: Yup.date().required('Required'),
         gameType: Yup.string().required('Required'),
         numberOfVouchers: Yup.number().required('Required'),
-      });
+    });
 
-    if(imageFile){
+    if (imageFile) {
         console.log(imageFile);
     }
 
@@ -57,27 +45,32 @@ const AddEvent = () => {
                     </div>
 
                     <div>
-                        <label className="Field--label">Start date</label>
-                        <Field type="date" name="startDate" placeholder="Start Date" />
+                        <label className="Field--label">Start Date and Time</label>
+                        <Field type="datetime-local" name="startDate" placeholder="Start Date and Time" />
                     </div>
 
                     <div>
-                        <label className="Field--label">End date</label>
-                        <Field type="date" name="endDate" placeholder="End Date" />
+                        <label className="Field--label">End Date and Time</label>
+                        <Field type="datetime-local" name="endDate" placeholder="End Date and Time" />
                     </div>
 
                     <div>
-                        <label className="Field--label">Game type</label>
-                        <Field type="text" name="gameType" placeholder="Game Type" />
+                        <label className="Field--label">Game Type</label>
+                        <Field as="select" name="gameType">
+                            <option value="Trivial Quiz" label="Trivial Quiz" />
+                            <option value="Roll Dice" label="Roll Dice" />
+                        </Field>
                     </div>
 
                     <div>
                         <label className="Field--label">Number Of Vouchers</label>
                         <Field type="number" name="numberOfVouchers" placeholder="Number Of Vouchers" />
                     </div>
+                    
                     <div></div>
-                    <Dropzone field={imageFile} setFieldValue={setImageFile}/>
+                    <Dropzone field={imageFile} setFieldValue={setImageFile} />
                     <div></div>
+                    
                     <div className="Button-container">
                         <button type="submit" className="submit-button">+ Add Event</button>
                     </div>

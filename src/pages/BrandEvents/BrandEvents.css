@@ -1,10 +1,10 @@
-.brand-events-add-button-container {
+.brand-events-create-button-container {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
 
-.brand-events-add-button {
+.brand-events-create-button {
     display: inline-flex;
     align-items: center;
     background-color: #007bff;
@@ -16,10 +16,11 @@
     cursor: pointer;
     transition: background-color 0.3s ease;
     margin-top: 5px;
+    margin-right: 5px;
     align-self: flex-end;
 }
 
 
-.brand-events-add-button:hover {
+.brand-events-create-button:hover {
     background-color: #0056b3;
 }

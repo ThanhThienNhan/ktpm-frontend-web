@@ -41,11 +41,16 @@
 .event-detail-dates {
     font-size: 1.2rem;
     margin-bottom: 8px;
+    border: none;
 }
 
-.event-detail-edit-button {
-    display: inline-flex;
-    align-items: center;
+.event-detail-buttons {
+    display: flex;
+    gap: 10px; 
+    margin-top: 20px;
+}
+
+.event-detail-button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -54,14 +59,12 @@
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin-top: 20px;
-    align-self: flex-end;
 }
 
-.event-detail-edit-button:hover {
+.event-detail-button:hover {
     background-color: #0056b3;
 }
 
-.event-detail-edit-button svg {
+.event-detail-button svg {
     margin-right: 10px;
 }

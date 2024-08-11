@@ -1,5 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 
+//Authentication
+import Authentication from "./pages/Authentication/Authentication";
+
 // Admin
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard";
 import AdminUserManagement from "./pages/AdminUserManagement/AdminUserManagement";
@@ -14,10 +17,12 @@ import BrandEventDetail from "./pages/BrandEventDetail/BrandEventDetail"
 import BrandReportDetail from "./pages/BrandReportDetail/BrandReportDetail"
 
 import AddEvent from "./pages/BrandEvents/AddEvent";
+import AddVoucher from "./pages/BrandEvents/AddVoucher";
 
 import EditEvent from "./pages/BrandEvents/EditEvent";
 
 import BrandInfo from "./pages/BrandInfo/BrandInfo"
+import BrandSearchEvents from "./pages/BrandSearchEvents/BrandSearchEvents";
 
 
 // Layouts
@@ -29,6 +34,17 @@ function App() {
   return (
     <>
       <Routes>
+        {/* Authentication */}
+        <Route path="/authentication">
+          <Route
+            path="/authentication/login"
+            element={<Authentication authenType={"Login"} />}
+          />
+          <Route
+            path="/authentication/register"
+            element={<Authentication authenType={"Register"} />}
+          />
+        </Route>
         {/* Admin */}
         <Route path="/admin" element={<Admin />}>
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -61,12 +77,16 @@ function App() {
         {/*Brand*/}
         <Route path="/" element={<Brand />}>
           <Route index element={<BrandEvents />} />
-          <Route path="/new" element={<AddEvent/>}/>
+          <Route path="/create-event" element={<AddEvent/>}/>
+          <Route path="/create-voucher" element={<AddVoucher/>}/>
+          <Route path="/search/:word" element={<BrandSearchEvents />} />
+
           <Route path="/edit/:id" element={<EditEvent/>}/>
+
           <Route path="/reports" element={<BrandReports />} />
-          <Route path="/event/:id" element={<BrandEventDetail/>}/>
-          <Route path="/report/:id" element={<BrandReportDetail/>}/>
-          <Route path="/brand-info" element={<BrandInfo/>}/>
+          <Route path="/event/:id" element={<BrandEventDetail />} />
+          <Route path="/report/:id" element={<BrandReportDetail />} />
+          <Route path="/brand-info" element={<BrandInfo />} />
         </Route>
       </Routes>
     </>

@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import React from "react";
+import React, { useState } from "react";
 import "./BrandEventDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import VoucherModal from "./VoucherModal";
 
 const event = {
   id: "abcxyz",
@@ -17,6 +18,10 @@ const event = {
 function BrandDetail() {
   const { id } = useParams();
   const currentEvent = event; // This will be fetched based on the ID
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
 
   return (
     <div className="event-detail-container">
@@ -27,10 +32,16 @@ function BrandDetail() {
         <p className="event-detail-vouchers">Total Vouchers: {currentEvent.totalVouchers}</p>
         <p className="event-detail-dates">Start Date: {currentEvent.startDate}</p>
         <p className="event-detail-dates">End Date: {currentEvent.endDate}</p>
-        <button className="event-detail-edit-button">
-          <FontAwesomeIcon icon={faEdit} /> Edit Event
-        </button>
+        <div className="event-detail-buttons">
+          <button className="event-detail-button" onClick={handleOpenModal}>
+            <FontAwesomeIcon icon={faEdit} /> Add Voucher
+          </button>
+          <button className="event-detail-button">
+            <FontAwesomeIcon icon={faEdit} /> Edit Event
+          </button>
+        </div>
       </div>
+      <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} />
     </div>
   );
 }
