@@ -99,7 +99,7 @@
     color: black;
 }
 
-p {
+.authen-frame p {
     width: 50%;
     text-align: center;
     border-bottom: 1px solid #000;
@@ -107,7 +107,7 @@ p {
     margin: 20px 0 20px;
 }
 
-p span {
+.authen-frame p span {
     background-color: #f8f8f8;
     padding: 0 10px;
 }
