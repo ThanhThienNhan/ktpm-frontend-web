@@ -8,7 +8,7 @@ const Dropzone = ({ field ,setFieldValue }) => {
   
     reader.onloadend = () => {
       const base64data = reader.result;  
-      setFieldValue(() => base64data);
+      setFieldValue(base64data);
     };
   
     reader.readAsDataURL(file);     

@@ -6,38 +6,36 @@ import "../../index.css"
 
 import UserTableView from '../../../components/UserTableView';
 import PaginationBar from '../../../components/PaginationBar';
+import ErrorMessageBox from '../../../components/ErrorMessageBox';
 
 function AdminUserManagement() {
   let navigate = useNavigate();
 
-  const usersData = [
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-    { name: 'John Doe', username: 'johndoe', email: 'johndoe@gmail.com', phone: '0123456789', role: 'Player', status: 'Active' },
-    { name: 'Jane Smith', username: 'janesmith', email: 'janesmith@gmail.com', phone: '0123456789', role: 'Brand', status: 'Banned' },
-  ];
-
   const totalPages = 10;
 
-  const [users, setUsers] = React.useState(usersData);
+  const [users, setUsers] = React.useState([]);
+  const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
     axios.get(`http://localhost:3001/v1/api/auth/users/`).then((response) => {
       setUsers(response.data);
-    })
-  },[])
+    }).catch((error) => {
+      console.error("There was an error loading users!", error);
+      setError("There was an error loading users! Check your connection.");
+    });
+  },[]);
+
+  React.useEffect(() => {
+    const handlePopState = () => {
+      window.location.reload();
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   function deleteUser(username){
     setUsers((oldUsers) => oldUsers.filter((user) => user.ID_TTNGUOIDUNG !== username));
@@ -53,6 +51,7 @@ function AdminUserManagement() {
     })
     .catch((error) => {
       console.error("There was an error deleting the user!", error);
+      setError("There was an error deleting the user! Please try again.");
     });
     
   }
@@ -66,14 +65,21 @@ function AdminUserManagement() {
     console.log("Page " + number);
   }
 
+  const handleCloseError = () => {
+    setError(null);
+  };
+
   return (
-    <div>
-      <div style={{height: "50px"}}>
-        <button className='Button'onClick={() => navigate("/admin/user-management/new")} >Add new user</button>
+    <>
+      {error && <ErrorMessageBox message={error} onClose={handleCloseError} />}
+      <div>
+        <div style={{height: "50px"}}>
+          <button className='Button'onClick={() => navigate("/admin/user-management/new")} >Add new user</button>
+        </div>
+        <UserTableView data={users} onDelete={deleteUser} onEdit={editUser}/>
+        <PaginationBar totalPages={totalPages} onPageChange={changePage}/>
       </div>
-      <UserTableView data={users} onDelete={deleteUser} onEdit={editUser}/>
-      <PaginationBar totalPages={totalPages} onPageChange={changePage}/>
-    </div>
+    </>
   )
 }
 
