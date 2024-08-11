@@ -13,6 +13,7 @@
 
 .form-container div {
   margin-bottom: 20px;
+  width: 70%;
 }
 
 .form-container label {
@@ -21,7 +22,7 @@
 }
 
 .input-field {
-  width: 300px;
+  width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #ddd;
@@ -46,4 +47,8 @@
 .submit-button:disabled {
   background-color: #ddd;
   color: #666;
+}
+
+.ErrorMessage{
+  color: red;
 }
