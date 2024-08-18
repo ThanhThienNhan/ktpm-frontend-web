@@ -1,0 +1,12 @@
+/* Container for pagination */
+.brand-reports-pagination-container {
+    display: flex;
+    justify-content: center; /* Center pagination horizontally */
+    margin: 20px 0; /* Space around pagination */
+}
+
+/* Centering for pagination component */
+.brand-reports-pagination {
+    display: flex;
+    align-items: center;
+}

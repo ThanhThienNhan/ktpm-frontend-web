@@ -16,7 +16,8 @@ const BrandPagination = ({ totalPages, currentPage, onPageChange }) => {
           </option>
         ))}
       </select>
-      <span> of {totalPages}</span>
+      <span>of</span>
+      <span>{totalPages}</span>
     </div>
   );
 };

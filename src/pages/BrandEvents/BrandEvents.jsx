@@ -7,72 +7,89 @@ import "./BrandEvents.css"
 
 const events = [
     {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Realtime Quiz",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
     },
     {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Realtime Quiz",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
     },
     {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Realtime Quiz",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
     },
     {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Realtime Quiz",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
     },
     {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Shake Phone",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
-    }, {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Shake Phone",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
-    }, {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Shake Phone",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
-    }, {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Shake Phone",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
     },
     {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Shake Phone",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
     },
     {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Shake Phone",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
     },
+    {
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
+    },
+    {
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
+    },
+    {
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
+    },
+    {
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
+    },
+    {
+        HINHANH: "https://via.placeholder.com/280x190",
+        TENSUKIEN: "Saturday Quiz",
+        LOAITROCHOI: "Realtime Quiz",
+        TGBATDAU: "18:00 13/08/2024",
+        TGKETTHUC: "20:00 13/08/2024",
+    }
 ];
 
 
@@ -98,23 +115,23 @@ const BrandEvents = () => {
         navigate('/create-voucher');
 
     };
-    
+
 
     return (
         <div>
             <h2>New Events</h2>
 
-           
+
             <div className="brand-events-create-button-container">
-            <button 
-                className="brand-events-create-button"
-                onClick={handleCreateVoucherClick}>
+                <button
+                    className="brand-events-create-button"
+                    onClick={handleCreateVoucherClick}>
                     Create a Voucher
                 </button>
 
-                <button 
-                className="brand-events-create-button"
-                onClick={handleCreateEventClick}>
+                <button
+                    className="brand-events-create-button"
+                    onClick={handleCreateEventClick}>
                     Create an Event
                 </button>
             </div>
@@ -125,11 +142,15 @@ const BrandEvents = () => {
                 eventsPerPage={eventsPerPage}
                 onPageChange={handlePageChange}
             />
-            <BrandPagination
-                totalPages={totalPages}
-                currentPage={currentPage}
-                onPageChange={handlePageChange}
-            />
+
+            <div className="brand-events-pagination-container">
+                <BrandPagination
+                    className="brand-events-pagination"
+                    totalPages={totalPages}
+                    currentPage={currentPage}
+                    onPageChange={handlePageChange}
+                />
+            </div>
         </div>
     );
 };
