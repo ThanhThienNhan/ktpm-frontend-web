@@ -24,3 +24,16 @@
 .brand-events-create-button:hover {
     background-color: #0056b3;
 }
+
+/* Container for pagination */
+.brand-events-pagination-container {
+    display: flex;
+    justify-content: center; /* Center pagination horizontally */
+    margin: 20px 0; /* Space around pagination */
+}
+
+/* Centering for pagination component */
+.brand-events-pagination {
+    display: flex;
+    align-items: center;
+}
