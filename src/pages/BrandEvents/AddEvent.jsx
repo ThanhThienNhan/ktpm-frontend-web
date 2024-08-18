@@ -57,7 +57,7 @@ const AddEvent = () => {
                     <div>
                         <label className="Field--label">Game Type</label>
                         <Field as="select" name="gameType">
-                            <option value="Trivial Quiz" label="Trivial Quiz" />
+                            <option value="Trivia Quiz" label="Trivia Quiz" />
                             <option value="Roll Dice" label="Roll Dice" />
                         </Field>
                     </div>
