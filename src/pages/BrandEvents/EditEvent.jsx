@@ -75,7 +75,7 @@ const EditEvent = () => {
                             <div>
                                 <label className="Field--label">Game Type</label>
                                 <Field as="select" name="gameType">
-                                    <option value="Trivial Quiz">Trivial Quiz</option>
+                                    <option value="Trivia Quiz">Trivia Quiz</option>
                                     <option value="Roll Dice">Roll Dice</option>
                                 </Field>
                             </div>
