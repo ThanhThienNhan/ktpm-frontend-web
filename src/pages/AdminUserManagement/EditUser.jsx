@@ -130,6 +130,7 @@ export default function EditUser() {
               <Field as="select" id="VAITRO" name="VAITRO" className="input-field">
                 <option value="Player">Player</option>
                 <option value="Admin">Admin</option>
+                <option value="Brand">Brand</option>
               </Field>
             </div>
         
