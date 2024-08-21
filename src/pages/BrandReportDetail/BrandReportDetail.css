@@ -28,7 +28,10 @@
     font-size: 2rem;
     margin-bottom: 10px;
   }
-  
+
+  .report-detail-name,
+  .report-detail-type,
+  .report-detail-dates,
   .report-detail-players,
   .report-detail-vouchers {
     font-size: 1.2rem;

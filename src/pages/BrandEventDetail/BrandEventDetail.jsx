@@ -1,37 +1,68 @@
+import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import React, { useState } from "react";
 import "./BrandEventDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import VoucherModal from "./VoucherModal";
 
-const event = {
-  id: "abcxyz",
-  totalVouchers: 500,
-  image: "https://via.placeholder.com/280x190",
-  name: "Saturday Quiz",
-  type: "Realtime Quiz",
-  startDate: "18:00 13/08/2023",
-  endDate: "20:00 13/08/2023",
-};
-
 function BrandDetail() {
-  const { id } = useParams();
-  const currentEvent = event; // This will be fetched based on the ID
+  const { id } = useParams(); // Get the event ID from the URL
+  const [currentEvent, setCurrentEvent] = useState(null);
+  const [vouchers, setVouchers] = useState([]);
+  const [totalVouchers, setTotalVouchers] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    // Fetch the event data from the API when the component mounts
+    const fetchEvent = async () => {
+      try {
+        const response = await fetch(`http://localhost:3002/api/v1/event/${id}`);
+        const data = await response.json();
+        setCurrentEvent(data);
+      } catch (error) {
+        console.error("Error fetching event data:", error);
+      }
+    };
+
+    fetchEvent();
+  }, [id]);
+
+  useEffect(() => {
+    const fetchVouchers = async () => {
+      if (currentEvent) {
+        try {
+          const response = await fetch(`http://localhost:3002/api/v1/voucher-event/event/${id}`);
+          const data = await response.json();
+          setVouchers(data);
+
+
+          const total = data.reduce((acc, voucher) => acc + voucher.SOLUONGVOUCHER, 0);
+          setTotalVouchers(total);
+        } catch (error) {
+          console.error("Error fetching vouchers data:", error);
+        }
+      }
+    };
+
+    fetchVouchers();
+  }, [currentEvent, id]);
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
+  if (!currentEvent) {
+    return <div>Loading...</div>; // Show a loading state while data is being fetched
+  }
+
   return (
     <div className="event-detail-container">
-      <img src={currentEvent.image} alt={currentEvent.name} className="event-detail-image" />
+      <img src={currentEvent.HINHANH} alt={currentEvent.TENSUKIEN} className="event-detail-image" />
       <div className="event-detail-info">
-        <h1 className="event-detail-name">{currentEvent.name}</h1>
-        <p className="event-detail-type">Type: {currentEvent.type}</p>
-        <p className="event-detail-vouchers">Total Vouchers: {currentEvent.totalVouchers}</p>
-        <p className="event-detail-dates">Start Date: {currentEvent.startDate}</p>
-        <p className="event-detail-dates">End Date: {currentEvent.endDate}</p>
+        <h1 className="event-detail-name">{currentEvent.TENSUKIEN}</h1>
+        <p className="event-detail-type">Type: {currentEvent.LOAITROCHOI}</p>
+        <p className="event-detail-vouchers">Total Vouchers: {totalVouchers || 'N/A'}</p>
+        <p className="event-detail-dates">Start Date: {new Date(currentEvent.TGBATDAU).toLocaleString()}</p>
+        <p className="event-detail-dates">End Date: {new Date(currentEvent.TGKETTHUC).toLocaleString()}</p>
         <div className="event-detail-buttons">
           <button className="event-detail-button" onClick={handleOpenModal}>
             <FontAwesomeIcon icon={faEdit} /> Add Voucher
