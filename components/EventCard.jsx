@@ -1,9 +1,26 @@
 import React from "react";
+import moment from 'moment';
 import "./EventCard.css";
+import { useNavigate } from "react-router-dom";
 
-const EventCard = ({ event }) => {
+const formatDate = (dateString) => {
+  return moment(dateString).format('MMMM D, YYYY h:mm A');
+};
+
+const EventCard = ({ event, context }) => {
+
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    if (context === "events") {
+      navigate(`/event/${event.ID_SUKIEN}`);
+    } else if (context === "reports") {
+      navigate(`/report/${event.ID_SUKIEN}`);
+    }
+  };
+
   return (
-    <div className="event-card">
+    <div className="event-card" onClick={handleCardClick}>
       <div
         className="event-card-thumbnail"
         style={{ backgroundImage: `url(${event.HINHANH})` }}
@@ -13,8 +30,8 @@ const EventCard = ({ event }) => {
         <div className="event-card-type">Type: {event.LOAITROCHOI}</div>
       </div>
       <div className="event-card-dates">
-        <div>Start: {event.TGBATDAU}</div>
-        <div>End: {event.TGKETTHUC}</div>
+        <div>Start: {formatDate(event.TGBATDAU)}</div>
+        <div>End: {formatDate(event.TGKETTHUC)}</div>
       </div>
     </div>
   );
