@@ -47,14 +47,15 @@ export default function EditUser() {
         });
       
       if(avatar !== null && avatar !== undefined && avatar !== ""){
-        axios.get(`http://localhost:3001/v1/api/auth/images/image/${avatar}`)
-        .then(response => {
-          const imageData = response.data;
-          setImageFile(imageData.secure_url);
-        }).catch(error => {
-          console.error('Error fetching user image:', error);
-          setError("There was an error fetching user image. Check your connection.");
-        });
+        //axios.get(`http://localhost:3001/v1/api/auth/images/image/${avatar}`)
+        //.then(response => {
+        //  const imageData = response.data;
+        //  setImageFile(imageData.secure_url);
+        //}).catch(error => {
+        //  console.error('Error fetching user image:', error);
+        //  setError("There was an error fetching user image. Check your connection.");
+        //});
+        setImageFile(avatar);
       }
         
     }//
@@ -65,11 +66,13 @@ export default function EditUser() {
     formData.append('file', base64data);
     formData.append('upload_preset', 'my-preset'); // Replace with your Cloudinary upload preset
 
+    console.log("Uploading Image");
     axios.post('https://api.cloudinary.com/v1_1/deabgvqk2/image/upload', formData) // Replace with your Cloudinary cloud name
     .then((response) => {
-      setImageFile(response.data.url);
-      setAvatar(response.data.public_id);
-      setOldAvatar(response.data.public_id);
+      console.log("Image Uploaded!");
+      setImageFile(response.data.secure_url);
+      setAvatar(response.data.secure_url);
+      setOldAvatar(response.data.secure_url);
     })
     .catch((error) => {
       console.error("There was an error uploading the image!", error);

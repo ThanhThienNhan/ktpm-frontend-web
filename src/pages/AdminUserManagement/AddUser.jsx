@@ -30,8 +30,8 @@ export default function AddUser() {
 
     axios.post('https://api.cloudinary.com/v1_1/deabgvqk2/image/upload', formData) // Replace with your Cloudinary cloud name
     .then((response) => {
-      setImageFile(response.data.url);
-      setAvatar(response.data.public_id);
+      setImageFile(response.data.secure_url);
+      setAvatar(response.data.secure_url);
       console.log(response);
     })
     .catch((error) => {

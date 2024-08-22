@@ -23,7 +23,7 @@ const Dropzone = ({ field, setFieldValue }) => {
         <img
           className="Image-display"
           id="DroppedImage"
-          src={URL.createObjectURL(field)} // Create a temporary URL to preview image
+          src={field} // Create a temporary URL to preview image
           alt="Uploaded"
         />
       )}

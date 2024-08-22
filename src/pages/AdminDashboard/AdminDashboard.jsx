@@ -1,6 +1,7 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import { BarChart, Bar, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Area } from 'recharts';
 import { Chart } from 'react-google-charts';
+import axios from 'axios';
 
 import "./AdminDashboard.css"
 import barcharticon from "../../assets/bar-chart-icon.png"
@@ -11,6 +12,38 @@ import TopProductsListView from '../../../components/TopProductsListView';
 import Barchart from '../../../components/Barchart';
 
 function AdminDashboard() {
+  const [playerCount, setPlayerCount] = useState(0);
+  const [brandCount, setBrandCount] = useState(0);
+  const [eventCount, setEventCount] = useState(0);
+
+  useEffect(() => {
+    //get players count
+    axios.get('http://localhost:3001/v1/api/auth/users/players-count')
+    .then((response) => {
+      setPlayerCount(response.data.count);
+    })
+    .catch((error) => {
+      console.error("There was an error fetching players count!", error);
+    });
+
+    //get brands count
+    axios.get('http://localhost:3001/v1/api/auth/users/brands-count') // Replace with your Cloudinary cloud name
+    .then((response) => {
+      setBrandCount(response.data.count);
+    })
+    .catch((error) => {
+      console.error("There was an error fetching brands count!", error);
+    });
+
+    //get events count
+    //axios.get('http://localhost:3001/v1/api/auth/users/brands-count') // Replace with your Cloudinary cloud name
+    //.then((response) => {
+    //  setBrandCount(response.data.count);
+    //})
+    //.catch((error) => {
+    //  console.error("There was an error fetching brands count!", error);
+    //});
+  },[])
 
   const revenueData = [
     { name: 'Monday', Online: 4000, Offline: 2400 },
@@ -54,7 +87,7 @@ function AdminDashboard() {
         <div className="stats-container">
           <StatBox 
             icon={barcharticon}
-            statNumber={100}
+            statNumber={playerCount}
             statTitle="Total Players"
             statSubtitle="+8% from yesterday"
             backgroundColor="#FCE9EC"
@@ -62,7 +95,7 @@ function AdminDashboard() {
 
           <StatBox 
             icon={note_icon}
-            statNumber={20}
+            statNumber={brandCount}
             statTitle="Total Brands"
             statSubtitle="+5% from yesterday"
             backgroundColor="#FEF3E6"
@@ -70,54 +103,66 @@ function AdminDashboard() {
 
           <StatBox 
             icon={tag_icon}
-            statNumber={10}
-            statTitle="Games Created"
+            statNumber={eventCount}
+            statTitle="On Going Events"
             statSubtitle="+8% from yesterday"
             backgroundColor="#E9FAEF"
           />
         </div>
       </div>
-      <div className='Charts-banner'>
-        
-        <Barchart data={revenueData}/>
 
-        <LineChart
-          width={500}
-          height={300}
-          data={customerData}
-          margin={{
-            top: 5, right: 30, left: 20, bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Area type="monotone" dataKey="Last" stroke="#8884d8" fill="#8884d8" fillOpacity={0.1} />
-          <Line type="monotone" dataKey="Last" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Area type="monotone" dataKey="This" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.1} />
-          <Line type="monotone" dataKey="This" stroke="#82ca9d" />
-        </LineChart>
-        
-        <TopProductsListView data={products}/>
-        
-        <div className="App">
-          <Chart
-            width={'500px'}
-            height={'300px'}
-            chartType="GeoChart"
-            data={mapChartSampleData}
-            options={{
-              colorAxis: { colors: ['#00853f', 'black', '#e31b23'] },
-            }}
-            mapsApiKey=""
-            rootProps={{ 'data-testid': '1' }}
-          />
+      <div className='stats-banner' style={{height:400}}>
+        <h2>Bars Chart</h2>
+        <div className="stats-container">
+          <Barchart data={revenueData}/>
         </div>
-
       </div>
-
+      
+      <div className='stats-banner' style={{height:400}}>
+        <h2>Line Chart</h2>
+        <div className="stats-container">
+          <LineChart
+            width={500}
+            height={300}
+            data={customerData}
+            margin={{
+              top: 5, right: 30, left: 20, bottom: 5,
+            }}
+          >
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Area type="monotone" dataKey="Last" stroke="#8884d8" fill="#8884d8" fillOpacity={0.1} />
+            <Line type="monotone" dataKey="Last" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Area type="monotone" dataKey="This" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.1} />
+            <Line type="monotone" dataKey="This" stroke="#82ca9d" />
+          </LineChart> 
+        </div>
+      </div>
+      <div className='stats-banner' style={{height:300}}>
+        <TopProductsListView data={products}/>
+      </div>
+      
+      <div className='stats-banner' style={{height:400}}>
+        <h2>Map Chart</h2>
+        <div className="stats-container">
+          <div className="App">
+            <Chart
+              width={'500px'}
+              height={'300px'}
+              chartType="GeoChart"
+              data={mapChartSampleData}
+              options={{
+                colorAxis: { colors: ['#00853f', 'black', '#e31b23'] },
+              }}
+              mapsApiKey=""
+              rootProps={{ 'data-testid': '1' }}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
