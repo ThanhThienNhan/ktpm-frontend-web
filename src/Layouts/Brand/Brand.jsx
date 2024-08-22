@@ -30,7 +30,7 @@ const Brand = () => {
         <Header userInfo={userInfo} setUserInfo={setUserInfo} />
         <Outlet context={{ userInfo, setUserInfo, userChange, changeUser }} />
         <ToastContainer
-          position="top-right"
+          position="bottom-right"
           autoClose={5000}
           hideProgressBar={false}
           newestOnTop={false}
