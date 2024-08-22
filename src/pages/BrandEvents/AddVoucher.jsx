@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
-import "./AddVoucher.css";
+import axios from 'axios';
 import Dropzone from "../../../components/Dropzone";
+import "./AddVoucher.css";
+import { toast } from 'react-toastify';
 
 const AddVoucher = () => {
     const [imageFile, setImageFile] = useState(undefined);
@@ -13,9 +15,34 @@ const AddVoucher = () => {
         description: Yup.string().required('Required'),
     });
 
-    if (imageFile) {
-        console.log(imageFile);
-    }
+    const handleSubmit = async (values, { resetForm }) => {
+        const formData = new FormData();
+        formData.append('ID_THUONGHIEU', '1'); // Temp ID 1
+        formData.append('NGAYHETHAN', values.expirationDate);
+        formData.append('TRIGIA', values.price);
+        formData.append('MOTA', values.description);
+
+        if (imageFile) {
+            formData.append('image', imageFile);
+        }
+
+        try {
+            const response = await axios.post('http://localhost:3002/api/v1/voucher', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            console.log('Voucher created successfully:', response.data);
+            toast.success('Add voucher successfully!');
+            resetForm();
+            setImageFile(undefined); 
+
+        } catch (error) {
+            console.error('Error creating voucher:', error.response ? error.response.data : error.message);
+            toast.error('Failed to add voucher.');
+        }
+    };
 
     return (
         <div>
@@ -28,9 +55,7 @@ const AddVoucher = () => {
                     description: '',
                 }}
                 validationSchema={validationSchema}
-                onSubmit={(values) => {
-                    console.log(values);
-                }}
+                onSubmit={handleSubmit}
             >
                 <Form className="form-container">
                     <div className="Input-grid">
