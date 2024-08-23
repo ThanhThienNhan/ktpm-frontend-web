@@ -4,6 +4,7 @@ import "./BrandEventDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import VoucherModal from "./VoucherModal";
+import axios from "axios";
 
 function BrandDetail() {
   const { id } = useParams(); // Get the event ID from the URL
@@ -13,7 +14,6 @@ function BrandDetail() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // Fetch the event data from the API when the component mounts
     const fetchEvent = async () => {
       try {
         const response = await fetch(`http://localhost:3002/api/v1/event/${id}`);
@@ -33,10 +33,8 @@ function BrandDetail() {
         try {
           const response = await fetch(`http://localhost:3002/api/v1/voucher-event/event/${id}`);
           const data = await response.json();
-          setVouchers(data);
-
-
-          const total = data.reduce((acc, voucher) => acc + voucher.SOLUONGVOUCHER, 0);
+          setVouchers(Array.isArray(data) ? data : []);
+          const total = data.reduce((acc, voucher) => acc + (voucher.SOLUONGVOUCHER || 0), 0);
           setTotalVouchers(total);
         } catch (error) {
           console.error("Error fetching vouchers data:", error);
@@ -50,8 +48,26 @@ function BrandDetail() {
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
+  const handleAddOrUpdateVouchers = async (newVouchers) => {
+    try {
+      const response = await axios.post("http://localhost:3002/api/v1/voucher-event", newVouchers);
+      console.log("Response:", response.data);
+
+      const updatedResponse = await fetch(`http://localhost:3002/api/v1/voucher-event/event/${id}`);
+      const updatedData = await updatedResponse.json();
+      setVouchers(Array.isArray(updatedData) ? updatedData : []);
+      
+      const total = updatedData.reduce((acc, voucher) => acc + (voucher.SOLUONGVOUCHER || 0), 0);
+      setTotalVouchers(total);
+
+      handleCloseModal();
+    } catch (error) {
+      console.error("Error adding/updating vouchers:", error);
+    }
+  };
+
   if (!currentEvent) {
-    return <div>Loading...</div>; // Show a loading state while data is being fetched
+    return <div>Loading...</div>;
   }
 
   return (
@@ -72,7 +88,7 @@ function BrandDetail() {
           </button>
         </div>
       </div>
-      <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} />
+      <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleAddOrUpdateVouchers} brandId={id} />
     </div>
   );
 }

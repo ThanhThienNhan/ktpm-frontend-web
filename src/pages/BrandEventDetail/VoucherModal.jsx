@@ -1,18 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './VoucherModal.css';
-
-const vouchers = [
-  { id: 1, name: 'Voucher 1', price: 50000, expirationDate: '10/09/2024', description: 'Description 1' },
-  { id: 2, name: 'Voucher 2', price: 10000, expirationDate: '10/09/2024', description: 'Description 2' },
-];
+import { toast } from 'react-toastify';
 
 const formatPrice = (price) => {
   return price.toLocaleString('vi-VN') + ' đ';
 };
 
-const VoucherModal = ({ isOpen, onClose }) => {
+const VoucherModal = ({ isOpen, onClose, onSave, brandId }) => {
+  const [vouchers, setVouchers] = useState([]);
   const [selectedVouchers, setSelectedVouchers] = useState({});
   const [checkedVouchers, setCheckedVouchers] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (isOpen && brandId) {
+      const fetchVouchers = async () => {
+        try {
+          const response = await axios.get(`http://localhost:3002/api/v1/voucher/${brandId}`);
+          setVouchers(Array.isArray(response.data) ? response.data : []);
+          setLoading(false);
+        } catch (err) {
+          console.error('Error fetching vouchers:', err);
+          setError('Failed to fetch vouchers.');
+          setLoading(false);
+        }
+      };
+      fetchVouchers();
+    } else {
+      setVouchers([]);
+    }
+  }, [isOpen, brandId]);
 
   const handleCheckboxChange = (e, id) => {
     const { checked } = e.target;
@@ -36,54 +55,66 @@ const VoucherModal = ({ isOpen, onClose }) => {
     });
   };
 
-  const handleSubmit = () => {
-    const result = Object.keys(selectedVouchers).reduce((acc, id) => {
-      if (checkedVouchers[id] && selectedVouchers[id] > 0) {
-        acc[id] = selectedVouchers[id];
+  const handleSubmit = async () => {
+    const result = Object.keys(selectedVouchers).map(id => ({
+      ID_VOUCHER: parseInt(id),
+      ID_SUKIEN: brandId, // Event ID
+      SOLUONGVOUCHER: parseInt(selectedVouchers[id])
+    }));
+
+    if (result.length > 0) {
+      try {
+        await onSave(result);
+        toast.success('Vouchers updated successfully!'); 
+      } catch (err) {
+        toast.error('Failed to update vouchers.');
       }
-      return acc;
-    }, {});
-    console.log(result);
+    }
+
     onClose();
   };
 
+  if (!isOpen) return null;
+
+  if (loading) return <div>Loading...</div>;
+
+  if (error) return <div>{error}</div>;
+
   return (
-    isOpen ? (
-      <div className="voucher-modal">
-        <div className="voucher-modal-content">
-          <span className="voucher-modal-close" onClick={onClose}>&times;</span>
-          <h2>Select Vouchers</h2>
-          <div className="voucher-list">
-            {vouchers.map(voucher => (
-              <div key={voucher.id} className="voucher-item">
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={checkedVouchers[voucher.id] || false}
-                    onChange={(e) => handleCheckboxChange(e, voucher.id)}
-                  />
-                  <div className="voucher-details">
-                    <h3>{voucher.name}</h3>
-                    <div>Price: {formatPrice(voucher.price)}</div>
-                    <div>Expiration Date: {voucher.expirationDate}</div>
-                    <div>Description: {voucher.description}</div>
-                    {checkedVouchers[voucher.id] && (
-                      <input
-                        type="number"
-                        placeholder="Number of Vouchers"
-                        value={selectedVouchers[voucher.id] || ''}
-                        onChange={(e) => handleInputChange(e, voucher.id)}
-                      />
-                    )}
-                  </div>
-                </label>
-              </div>
-            ))}
-          </div>
-          <button className="voucher-modal-submit" onClick={handleSubmit}>Submit</button>
+    <div className="voucher-modal">
+      <div className="voucher-modal-content">
+        <span className="voucher-modal-close" onClick={onClose}>&times;</span>
+        <h2>Select Vouchers</h2>
+        <div className="voucher-list">
+          {Array.isArray(vouchers) && vouchers.map(voucher => (
+            <div key={voucher.ID_VOUCHER} className="voucher-item">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={checkedVouchers[voucher.ID_VOUCHER] || false}
+                  onChange={(e) => handleCheckboxChange(e, voucher.ID_VOUCHER)}
+                />
+                <div className="voucher-details">
+                  <img src={voucher.HINHANH} alt={voucher.MOTA} className="voucher-image" />
+                  <h3>{voucher.MOTA}</h3>
+                  <div>Price: {formatPrice(voucher.TRIGIA)}</div>
+                  <div>Expiration Date: {new Date(voucher.NGAYHETHAN).toLocaleDateString()}</div>
+                  {checkedVouchers[voucher.ID_VOUCHER] && (
+                    <input
+                      type="number"
+                      placeholder="Number of Vouchers"
+                      value={selectedVouchers[voucher.ID_VOUCHER] || ''}
+                      onChange={(e) => handleInputChange(e, voucher.ID_VOUCHER)}
+                    />
+                  )}
+                </div>
+              </label>
+            </div>
+          ))}
         </div>
+        <button className="voucher-modal-submit" onClick={handleSubmit}>Submit</button>
       </div>
-    ) : null
+    </div>
   );
 };
 
