@@ -4,7 +4,7 @@ import "./EventCard.css";
 import { useNavigate } from "react-router-dom";
 
 const formatDate = (dateString) => {
-  return moment(dateString).format('MMMM D, YYYY h:mm A');
+  return moment.parseZone(dateString).format('MMMM D, YYYY h:mm A');
 };
 
 const EventCard = ({ event, context }) => {
