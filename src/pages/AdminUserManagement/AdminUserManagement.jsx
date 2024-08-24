@@ -17,7 +17,7 @@ function AdminUserManagement() {
   const [error, setError] = React.useState(null);
 
   React.useEffect(() => {
-    axios.get(`http://localhost:3001/v1/api/auth/users/`).then((response) => {
+    axios.get(`http://localhost:2999/user/v1/api/auth/users/`).then((response) => {
       setUsers(response.data);
     }).catch((error) => {
       console.error("There was an error loading users!", error);
@@ -40,7 +40,7 @@ function AdminUserManagement() {
   function deleteUser(username){
     setUsers((oldUsers) => oldUsers.filter((user) => user.ID_TTNGUOIDUNG !== username));
 
-    axios.delete(`http://localhost:3001/v1/api/auth/users/${username}`, {
+    axios.delete(`http://localhost:2999/user/v1/api/auth/users/${username}`, {
       headers: {
         'Content-Type': 'application/json'
       }

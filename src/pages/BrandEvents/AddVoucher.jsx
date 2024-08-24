@@ -27,7 +27,7 @@ const AddVoucher = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:3002/api/v1/voucher', formData, {
+            const response = await axios.post('http://localhost:2999/brand/api/v1/voucher', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }

@@ -12,7 +12,7 @@ const BrandSearchEvents = () => {
         const fetchEvents = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://localhost:3002/api/v1/event/search?term=${encodeURIComponent(word)}`);
+                const response = await fetch(`http://localhost:2999/brand/api/v1/event/search?term=${encodeURIComponent(word)}`);
                 if (!response.ok) {
                     throw new Error('Response was not ok');
                 }

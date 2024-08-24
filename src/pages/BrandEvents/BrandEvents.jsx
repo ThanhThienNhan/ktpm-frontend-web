@@ -14,7 +14,7 @@ const BrandEvents = () => {
     const brandId = 1;  // Temporary idThuongHieu set to 1
 
     useEffect(() => {
-        fetch(`http://localhost:3002/api/v1/event/coming/${brandId}`)
+        fetch(`http://localhost:2999/brand/api/v1/event/coming/${brandId}`)
             .then(response => response.json())
             .then(data => {
                 //console.log(data); 

@@ -1,7 +1,7 @@
 .admin-header {
     padding: 0 40px;
     width: 100%;
-    height: 110px;
+    height: 90px;
     background-color: #1a4649;
     display: flex;
     justify-content: space-between;
@@ -16,6 +16,7 @@
     text-align: center;
     text-decoration: none;
     color: white;
+    font-weight: bold;
 }
 
 .admin-head-logout-btn {

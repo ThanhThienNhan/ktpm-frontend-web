@@ -19,7 +19,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     //get players count
-    axios.get('http://localhost:3001/v1/api/auth/users/players-count')
+    axios.get('http://localhost:2999/user/v1/api/auth/users/players-count')
     .then((response) => {
       setPlayerCount(response.data.count);
     })
@@ -28,7 +28,7 @@ function AdminDashboard() {
     });
 
     //get brands count
-    axios.get('http://localhost:3001/v1/api/auth/users/brands-count') // Replace with your Cloudinary cloud name
+    axios.get('http://localhost:2999/user/v1/api/auth/users/brands-count') // Replace with your Cloudinary cloud name
     .then((response) => {
       setBrandCount(response.data.count);
     })
@@ -37,7 +37,7 @@ function AdminDashboard() {
     });
 
     //get events count
-    axios.get('http://localhost:3002/api/v1/event/happening/count') // Replace with your Cloudinary cloud name
+    axios.get('http://localhost:2999/brand/api/v1/event/happening/count') // Replace with your Cloudinary cloud name
     .then((response) => {
       setEventCount(response.data.count);
     })
@@ -55,7 +55,7 @@ function AdminDashboard() {
     };
     
     //get login data
-    axios.post('http://localhost:3005/v1/api/auth/statistic', dateObject) // Replace with your Cloudinary cloud name
+    axios.post('http://localhost:2999/auth/v1/api/auth/statistic', dateObject) // Replace with your Cloudinary cloud name
     .then((response) => {
       setLoginData(response.data.data);
     })
@@ -86,10 +86,10 @@ function AdminDashboard() {
   ];
 
   const products = [
-    { id: 1, name: 'Home Decor', popularity: 80, sales: 45 },
-    { id: 2, name: 'Disney Princess', popularity: 60, sales: 29 },
-    { id: 3, name: 'Bathroom', popularity: 40, sales: 18 },
-    { id: 4, name: 'Apple', popularity: 20, sales: 25 },
+    { id: 1, name: 'Weekend Trivia Extravaganza', popularity: 80, sales: 45 },
+    { id: 2, name: 'Lucky Dice Draw', popularity: 60, sales: 29 },
+    { id: 3, name: 'Trivia Night Showdown', popularity: 40, sales: 18 },
+    { id: 4, name: 'Dice Roll Madness', popularity: 20, sales: 25 },
   ];
 
   const mapChartSampleData = [

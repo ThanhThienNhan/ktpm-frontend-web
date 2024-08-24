@@ -17,7 +17,7 @@ function BrandReportDetail() {
   useEffect(() => {
     const fetchReportData = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/api/v1/event/${id}`);
+        const response = await fetch(`http://localhost:2999/brand/api/v1/event/${id}`);
         const data = await response.json();
         setReportData(data);
       } catch (error) {
@@ -27,7 +27,7 @@ function BrandReportDetail() {
 
     const fetchVoucherData = async () => {
       try {
-        const response = await fetch(`http://localhost:3002/api/v1/voucher-event/event/${id}`);
+        const response = await fetch(`http://localhost:2999/brand/api/v1/voucher-event/event/${id}`);
         const data = await response.json();
         setVoucherData(data);
 

@@ -18,7 +18,7 @@ export default function TopProductsListView(props){
             <strong>Rank</strong>
             <strong>Name</strong>
             <strong>Percentage</strong>
-            <strong>Sales</strong>
+            <strong>Likes</strong>
           </div>
           <ul className='product-list'>
             {data.map((product, index) => (

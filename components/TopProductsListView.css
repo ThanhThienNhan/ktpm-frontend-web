@@ -1,6 +1,10 @@
 .container {
     padding: 20px;
   }
+
+.container > h2 {
+  margin-bottom: 10px;
+}
   
   .header {
     display: grid;

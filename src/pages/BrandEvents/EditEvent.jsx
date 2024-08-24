@@ -22,7 +22,7 @@ const EditEvent = () => {
     useEffect(() => {
         const fetchEventData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3002/api/v1/event/${id}`);
+                const response = await axios.get(`http://localhost:2999/brand/api/v1/event/${id}`);
                 setEventData(response.data);
                 setImageFile(response.data.HINHANH);
             } catch (error) {
@@ -46,7 +46,7 @@ const EditEvent = () => {
         }
 
         try {
-            await axios.put(`http://localhost:3002/api/v1/event/${id}`, formData, {
+            await axios.put(`http://localhost:2999/brand/api/v1/event/${id}`, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
