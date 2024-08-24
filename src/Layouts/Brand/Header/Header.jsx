@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
@@ -6,9 +6,8 @@ import "./Header.css";
 
 const Header = ({ userInfo, setUserInfo }) => {
     const navigate = useNavigate();
-    const timeoutRef = useRef(null);
-
     const [showAvtDropdown, setShowAvtDropdown] = useState(false);
+    const [searchField, setSearchField] = useState("");
 
     const showAvatarDropdown = () => {
         setShowAvtDropdown(!showAvtDropdown);
@@ -28,8 +27,6 @@ const Header = ({ userInfo, setUserInfo }) => {
         };
     }, []);
 
-    const [searchField, setSearchField] = useState("");
-
     const logOut = () => {
         // fetch("http://localhost:1234/api/v1/user/account/logout", {
         //     credentials: "include",
@@ -44,7 +41,13 @@ const Header = ({ userInfo, setUserInfo }) => {
     };
 
     const handleKeyPress = (event) => {
-        if (event.key === "Enter") {
+        if (event.key === "Enter" && searchField.trim()) {
+            navigate(`/search/${searchField}`);
+        }
+    };
+
+    const handleSearchClick = () => {
+        if (searchField.trim()) {
             navigate(`/search/${searchField}`);
         }
     };
@@ -61,12 +64,13 @@ const Header = ({ userInfo, setUserInfo }) => {
             <div className="search-box">
                 <input
                     type="text"
+                    value={searchField}
                     onChange={(e) => setSearchField(e.target.value)}
                     className="search-input"
                     placeholder="Search..."
                     onKeyDown={handleKeyPress}
                 />
-                <button className="search-button" onClick={() => navigate(`/search/${searchField}`)}>
+                <button className="search-button" onClick={handleSearchClick}>
                     <FontAwesomeIcon icon={faSearch} />
                 </button>
             </div>
@@ -80,7 +84,6 @@ const Header = ({ userInfo, setUserInfo }) => {
                         {showAvtDropdown && (
                             <div className="dropdown-menu" id="avt-dropdown">
                                 <Link to="/brand-info">Profile</Link>
-                                
                                 <hr />
                                 <Link onClick={logOut}>
                                     <FontAwesomeIcon

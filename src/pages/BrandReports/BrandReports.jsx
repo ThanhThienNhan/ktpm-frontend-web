@@ -37,7 +37,6 @@ const BrandReports = () => {
 
             <EventShelf
                 events={selectedEvents}
-                context="reports"
             />
 
             <div className="brand-reports-pagination-container">

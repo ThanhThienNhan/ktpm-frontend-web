@@ -7,7 +7,7 @@ const EventShelf = ({ events, context }) => {
         <div>
             <div className="event-shelf">
                 {events.map((event, index) => (
-                    <EventCard key={index} event={event} context={context} />
+                    <EventCard key={index} event={event} />
                 ))}
             </div>
         </div>
