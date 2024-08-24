@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import { useParams } from "react-router-dom";
 import axios from 'axios';
 import "./AddEvent.css";
-import Dropzone from "../../../components/Dropzone";
+import DropzoneBrand from "../../../components/DropzoneBrand";
 import { toast } from 'react-toastify';
 
 const EditEvent = () => {
@@ -99,7 +99,7 @@ const EditEvent = () => {
                                 </div>
 
                                 <div></div>
-                                <Dropzone field={imageFile} setFieldValue={setImageFile} />
+                                <DropzoneBrand field={imageFile} setFieldValue={setImageFile} />
                                 <div></div>
                                 <div className="Button-container">
                                     <button type="submit" className="submit-button">Save Changes</button>
