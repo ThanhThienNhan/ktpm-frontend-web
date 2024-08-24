@@ -72,7 +72,7 @@ function BrandDetail() {
   };
 
   const handleEditEvent = () => {
-    window.location.href = `/edit/${id}`;
+    window.location.href = `/brand/edit/${id}`;
   };
 
   if (!currentEvent) {

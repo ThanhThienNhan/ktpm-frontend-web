@@ -15,6 +15,7 @@ function AdminDashboard() {
   const [playerCount, setPlayerCount] = useState(0);
   const [brandCount, setBrandCount] = useState(0);
   const [eventCount, setEventCount] = useState(0);
+  const [loginData, setLoginData] = useState(0);
 
   useEffect(() => {
     //get players count
@@ -36,15 +37,35 @@ function AdminDashboard() {
     });
 
     //get events count
-    //axios.get('http://localhost:3001/v1/api/auth/users/brands-count') // Replace with your Cloudinary cloud name
-    //.then((response) => {
-    //  setBrandCount(response.data.count);
-    //})
-    //.catch((error) => {
-    //  console.error("There was an error fetching brands count!", error);
-    //});
+    axios.get('http://localhost:3002/api/v1/event/happening/count') // Replace with your Cloudinary cloud name
+    .then((response) => {
+      setEventCount(response.data.count);
+    })
+    .catch((error) => {
+      console.error("There was an error fetching brands count!", error);
+    });
+
+    const now = new Date();
+    const lastMonth = new Date(now);
+    lastMonth.setMonth(lastMonth.getMonth() - 1);
+    
+    const dateObject = {
+      startDay: "2024-08-18", // Format as YYYY-MM-DD
+      endDay: "2024-08-24"
+    };
+    
+    //get login data
+    axios.post('http://localhost:3005/v1/api/auth/statistic', dateObject) // Replace with your Cloudinary cloud name
+    .then((response) => {
+      setLoginData(response.data.data);
+      console.log(response.data.data);
+    })
+    .catch((error) => {
+      console.error("There was an error fetching login data!", error);
+    });
   },[])
 
+  //login data sample
   const revenueData = [
     { name: 'Monday', Online: 4000, Offline: 2400 },
     { name: 'Tuesday', Online: 3000, Offline: 1398 },
@@ -56,11 +77,13 @@ function AdminDashboard() {
   ];
 
   const customerData = [
-    { name: 'Point 1', Last: 65, This: 28 },
-    { name: 'Point 2', Last: 59, This: 48 },
-    { name: 'Point 3', Last: 80, This: 40 },
-    { name: 'Point 4', Last: 81, This: 19 },
-    { name: 'Point 5', Last: 56, This: 86 },
+    { name: '2024-08-28', HQTrivia: 65, DiceRoll: 28 },
+    { name: '2024-08-29', HQTrivia: 59, DiceRoll: 48 },
+    { name: '2024-08-20', HQTrivia: 80, DiceRoll: 40 },
+    { name: '2024-08-21', HQTrivia: 81, DiceRoll: 19 },
+    { name: '2024-08-22', HQTrivia: 56, DiceRoll: 86 },
+    { name: '2024-08-23', HQTrivia: 56, DiceRoll: 86 },
+    { name: '2024-08-24', HQTrivia: 56, DiceRoll: 86 },
   ];
 
   const products = [
@@ -112,14 +135,14 @@ function AdminDashboard() {
       </div>
 
       <div className='stats-banner' style={{height:400}}>
-        <h2>Bars Chart</h2>
+        <h2>User login record</h2>
         <div className="stats-container">
-          <Barchart data={revenueData}/>
+          <Barchart data={loginData}/>
         </div>
       </div>
       
       <div className='stats-banner' style={{height:400}}>
-        <h2>Line Chart</h2>
+        <h2>Number of on going events created associated with games</h2>
         <div className="stats-container">
           <LineChart
             width={500}
@@ -134,34 +157,15 @@ function AdminDashboard() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Area type="monotone" dataKey="Last" stroke="#8884d8" fill="#8884d8" fillOpacity={0.1} />
-            <Line type="monotone" dataKey="Last" stroke="#8884d8" activeDot={{ r: 8 }} />
-            <Area type="monotone" dataKey="This" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.1} />
-            <Line type="monotone" dataKey="This" stroke="#82ca9d" />
+            <Area type="monotone" dataKey="HQTrivia" stroke="#8884d8" fill="#8884d8" fillOpacity={0.1} />
+            <Line type="monotone" dataKey="HQTrivia" stroke="#8884d8" activeDot={{ r: 8 }} />
+            <Area type="monotone" dataKey="DiceRoll" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.1} />
+            <Line type="monotone" dataKey="DiceRoll" stroke="#82ca9d" />
           </LineChart> 
         </div>
       </div>
       <div className='stats-banner' style={{height:300}}>
         <TopProductsListView data={products}/>
-      </div>
-      
-      <div className='stats-banner' style={{height:400}}>
-        <h2>Map Chart</h2>
-        <div className="stats-container">
-          <div className="App">
-            <Chart
-              width={'500px'}
-              height={'300px'}
-              chartType="GeoChart"
-              data={mapChartSampleData}
-              options={{
-                colorAxis: { colors: ['#00853f', 'black', '#e31b23'] },
-              }}
-              mapsApiKey=""
-              rootProps={{ 'data-testid': '1' }}
-            />
-          </div>
-        </div>
       </div>
     </div>
   )

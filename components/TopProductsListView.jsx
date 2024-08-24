@@ -13,7 +13,7 @@ export default function TopProductsListView(props){
 
     return (
         <div className='container'>
-          <h2>Top Products</h2>
+          <h2>Top Events</h2>
           <div className='header'>
             <strong>Rank</strong>
             <strong>Name</strong>

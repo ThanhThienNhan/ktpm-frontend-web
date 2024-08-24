@@ -34,11 +34,11 @@ const BrandEvents = () => {
     const selectedEvents = events.slice(startIndex, startIndex + eventsPerPage);
 
     const handleCreateEventClick = () => {
-        navigate('/create-event');
+        navigate('/brand/create-event');
     };
 
     const handleCreateVoucherClick = () => {
-        navigate('/create-voucher');
+        navigate('/brand/create-voucher');
     };
 
     return (

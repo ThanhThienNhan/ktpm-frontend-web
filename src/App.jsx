@@ -35,13 +35,13 @@ function App() {
     <>
       <Routes>
         {/* Authentication */}
-        <Route path="/authentication">
+        <Route path="/" element={<Authentication authenType={"Login"} />}>
           <Route
-            path="/authentication/login"
+            path="/login"
             element={<Authentication authenType={"Login"} />}
           />
           <Route
-            path="/authentication/register"
+            path="/register"
             element={<Authentication authenType={"Register"} />}
           />
         </Route>
@@ -75,18 +75,18 @@ function App() {
           />
         </Route>
         {/*Brand*/}
-        <Route path="/" element={<Brand />}>
+        <Route path="/brand" element={<Brand />}>
           <Route index element={<BrandEvents />} />
-          <Route path="/create-event" element={<AddEvent/>}/>
-          <Route path="/create-voucher" element={<AddVoucher/>}/>
-          <Route path="/search/:word" element={<BrandSearchEvents />} />
+          <Route path="/brand/create-event" element={<AddEvent/>}/>
+          <Route path="/brand/create-voucher" element={<AddVoucher/>}/>
+          <Route path="/brand/search/:word" element={<BrandSearchEvents />} />
 
-          <Route path="/edit/:id" element={<EditEvent/>}/>
+          <Route path="/brand/edit/:id" element={<EditEvent/>}/>
 
-          <Route path="/reports" element={<BrandReports />} />
-          <Route path="/event/:id" element={<BrandEventDetail />} />
-          <Route path="/report/:id" element={<BrandReportDetail />} />
-          <Route path="/brand-info" element={<BrandInfo />} />
+          <Route path="/brand/reports" element={<BrandReports />} />
+          <Route path="/brand/event/:id" element={<BrandEventDetail />} />
+          <Route path="/brand/report/:id" element={<BrandReportDetail />} />
+          <Route path="/brand/brand-info" element={<BrandInfo />} />
         </Route>
       </Routes>
     </>

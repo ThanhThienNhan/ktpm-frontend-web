@@ -42,24 +42,24 @@ const Header = ({ userInfo, setUserInfo }) => {
 
     const handleKeyPress = (event) => {
         if (event.key === "Enter" && searchField.trim()) {
-            navigate(`/search/${searchField}`);
+            navigate(`/brand/search/${searchField}`);
         }
     };
 
     const handleSearchClick = () => {
         if (searchField.trim()) {
-            navigate(`/search/${searchField}`);
+            navigate(`/brand/search/${searchField}`);
         }
     };
 
     return (
         <header>
-            <Link to="/" className="logo">
+            <Link to="/brand" className="logo">
                 BRAND
             </Link>
             <nav className="brand-nav">
-                <Link to="/">Events</Link>
-                <Link to="/reports">Reports</Link>
+                <Link to="/brand">Events</Link>
+                <Link to="/brand/reports">Reports</Link>
             </nav>
             <div className="search-box">
                 <input

@@ -15,9 +15,9 @@ const EventCard = ({ event, context }) => {
     const endDate = moment.parseZone(event.TGKETTHUC); 
 
     if (endDate.isAfter(now)) {
-      navigate(`/event/${event.ID_SUKIEN}`); 
+      navigate(`/brand/event/${event.ID_SUKIEN}`); 
     } else {
-      navigate(`/report/${event.ID_SUKIEN}`);
+      navigate(`/brand/report/${event.ID_SUKIEN}`);
     }
   };
 
