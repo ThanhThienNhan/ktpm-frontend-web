@@ -76,16 +76,16 @@ function BrandReportDetail() {
           </thead>
           <tbody>
             {[
-              { username: "user1", points: 30 },
-              { username: "user2", points: 60 },
-              { username: "user3", points: 45 },
-              { username: "user4", points: 150 },
-              { username: "user5", points: 90 },
-              { username: "user6", points: 35 },
-              { username: "user7", points: 20 },
-              { username: "user8", points: 120 },
-              { username: "user9", points: 10 },
-              { username: "user10", points: 240 },
+              { "username": "JackAnderson", "points": 240 },
+              { "username": "DavidBrown", "points": 150 },
+              { "username": "HannahMoore", "points": 120 },
+              { "username": "EveDavis", "points": 90 },
+              { "username": "BobSmith", "points": 60 },
+              { "username": "CarolJohnson", "points": 45 },
+              { "username": "FrankMiller", "points": 35 },
+              { "username": "AliceGreen", "points": 30 },
+              { "username": "GraceWilson", "points": 20 },
+              { "username": "IanTaylor", "points": 10 }
             ].map((data, index) => (
               <tr key={index}>
                 <td>{data.username}</td>

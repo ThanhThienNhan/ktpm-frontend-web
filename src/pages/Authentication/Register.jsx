@@ -82,6 +82,37 @@ const Register = () => {
                         Password & Confirmed Password do not match
                     </div>
                 )}
+                
+                <div className="input-box">
+                    <input
+                        className="input-field"
+                        id="register-phone"
+                        placeholder="Company name"
+                        pattern="0[0-9]{9}"
+                    />
+                </div>
+
+                <div className="input-box">
+                    <input
+                        className="input-field"
+                        id="register-phone"
+                        placeholder="Field Domain"
+                        pattern="0[0-9]{9}"
+                    />
+                </div>
+
+                <div className="input-box">
+                    <input
+                        className="input-field"
+                        id="register-phone"
+                        placeholder="Address"
+                        pattern="0[0-9]{9}"
+                    />
+                </div>
+
+
+
+
                 <div className="agreed-term">
                     By clicking "Register" you agree to our terms and privacy policy.
                 </div>

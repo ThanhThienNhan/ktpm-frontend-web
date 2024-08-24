@@ -4,7 +4,12 @@
     width: 75%; /* Adjust width as needed */
     margin: auto; /* Center the form */
     align-items: center;
-
+  }
+  .form-container div {
+    margin-bottom: 20px;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
   }
 
   .Input-grid{

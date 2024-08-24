@@ -54,6 +54,7 @@ function AdminGameManagement() {
 
   function deleteGame(id){
     //make API call
+    
   }
 
   function changePage(number){

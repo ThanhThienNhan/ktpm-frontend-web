@@ -75,7 +75,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                     >
                         {showAvtDropdown && (
                             <div className="dropdown-menu" id="avt-dropdown">
-                                <Link to="/brand-info">Profile</Link>
+                                <Link to="/brand/brand-info">Profile</Link>
                                 <hr />
                                 <Link onClick={logOut}>
                                     <FontAwesomeIcon
