@@ -12,6 +12,7 @@ const formatDate = (dateString) => {
 };
 
 function BrandDetail() {
+  const BrandId=1; //Temp Id
   const { id } = useParams(); // Get the event ID from the URL
   const [currentEvent, setCurrentEvent] = useState(null);
   const [vouchers, setVouchers] = useState([]);
@@ -97,7 +98,7 @@ function BrandDetail() {
           </button>
         </div>
       </div>
-      <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleAddOrUpdateVouchers} brandId={id} />
+      <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleAddOrUpdateVouchers} brandId={BrandId} />
     </div>
   );
 }

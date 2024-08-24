@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Formik, Field, Form } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import Dropzone from "../../../components/Dropzone";
+import DropzoneBrand from "../../../components/DropzoneBrand";
 import "./AddEvent.css";
 import { toast } from 'react-toastify';
 
@@ -92,7 +92,7 @@ const AddEvent = () => {
 
                             <div>
                                 <label className="Field--label">Image</label>
-                                <Dropzone field={imageFile} setFieldValue={setImageFile} />
+                                <DropzoneBrand field={imageFile} setFieldValue={setImageFile} />
                             </div>
                         </div>
 
