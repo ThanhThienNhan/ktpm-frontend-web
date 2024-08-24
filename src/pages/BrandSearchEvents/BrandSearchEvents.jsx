@@ -2,39 +2,43 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import EventShelf from "../../../components/EventShelf";
 
-const events = [
-    {
-        image: "https://via.placeholder.com/280x190",
-        name: "Saturday Quiz",
-        type: "Realtime Quiz",
-        startDate: "18:00 13/08/2024",
-        endDate: "20:00 13/08/2024",
-    },
-    {
-        image: "https://via.placeholder.com/280x190",
-        name: "Sunday Quiz",
-        type: "Shake Phone",
-        startDate: "19:00 14/08/2024",
-        endDate: "21:00 14/08/2024",
-    },
-];
-
 const BrandSearchEvents = () => {
     const { word } = useParams();
+    const [events, setEvents] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-    const filteredEvents = events.filter(event =>
-        event.name.toLowerCase().includes(word.toLowerCase()) ||
-        event.type.toLowerCase().includes(word.toLowerCase())
-    );
+    useEffect(() => {
+        const fetchEvents = async () => {
+            try {
+                setLoading(true);
+                const response = await fetch(`http://localhost:3002/api/v1/event/search?term=${encodeURIComponent(word)}`);
+                if (!response.ok) {
+                    throw new Error('Response was not ok');
+                }
+                const data = await response.json();
+                setEvents(data);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchEvents();
+    }, [word]);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error: {error}</p>;
 
     return (
         <div>
             <h2>Search Results for "{word}"</h2>
-
-            <EventShelf
-                events={filteredEvents}
-            />
-
+            {events.length > 0 ? (
+                <EventShelf events={events} />
+            ) : (
+                <p>No events found for "{word}".</p>
+            )}
         </div>
     );
 };

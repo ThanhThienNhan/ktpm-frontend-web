@@ -8,13 +8,15 @@ const formatDate = (dateString) => {
 };
 
 const EventCard = ({ event, context }) => {
-
   const navigate = useNavigate();
+  const now = moment(); // Current date and time
 
   const handleCardClick = () => {
-    if (context === "events") {
-      navigate(`/event/${event.ID_SUKIEN}`);
-    } else if (context === "reports") {
+    const endDate = moment.parseZone(event.TGKETTHUC); 
+
+    if (endDate.isAfter(now)) {
+      navigate(`/event/${event.ID_SUKIEN}`); 
+    } else {
       navigate(`/report/${event.ID_SUKIEN}`);
     }
   };
