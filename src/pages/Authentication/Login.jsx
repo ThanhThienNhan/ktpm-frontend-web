@@ -23,7 +23,7 @@ const Login = () => {
     const password = document.querySelector("#login-password").value;
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/user/account/login",
+        "http://localhost:2999/auth/v1/api/auth/login",
         {
           credentials: "include",
           method: "POST",
@@ -31,14 +31,18 @@ const Login = () => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            username: name,
+            email: name,
             password: password,
           }),
         }
       );
       const data = await response.json();
-      if (data.body) {
-        window.location.href = "/";
+      console.log(data.data.user.VAITRO)
+      const roles = data.data.user.VAITRO;
+      if (roles == "Brand") {
+        window.location.href = "/brand";
+      } else if (roles == "Admin") {
+        window.location.href = "/admin/dashboard"
       } else {
         setError(true);
       }
@@ -91,7 +95,7 @@ const Login = () => {
       </div>
       <div className="authen-route">
         Don't have an account?{" "}
-        <Link to="/authentication/register">Sign Up</Link>
+        <Link to="/register">Sign Up</Link>
       </div>
     </>
   );

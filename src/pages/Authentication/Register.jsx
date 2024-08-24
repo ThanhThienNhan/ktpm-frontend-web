@@ -16,24 +16,28 @@ const Register = () => {
         if (password === confirmedPassword) {
             setError(false);
             const sendObj = {
-                UserName: phone,
-                Password: password,
-                ConfirmPassword: confirmedPassword,
+                name: "Default",
+                email: phone,
+                password: password
             };
             try {
-                const response = await fetch("http://localhost:8000/api/v1/user", {
-                    credentials: "include",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    method: "POST",
-                    body: JSON.stringify(sendObj),
-                });
-
-                if (response.ok) {
-                    navigate("/authentication/login");
+                if (password == confirmedPassword) {
+                    const response = await fetch("http://localhost:2999/auth/v1/api/auth/signup", {
+                        credentials: "include",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        method: "POST",
+                        body: JSON.stringify(sendObj),
+                    });
+    
+                    if (response.ok) {
+                        navigate("/");
+                    } else {
+                        console.error("Failed to create post");
+                    }
                 } else {
-                    console.error("Failed to create post");
+                    // handle later
                 }
             } catch (error) {
                 console.error("Error:", error);
