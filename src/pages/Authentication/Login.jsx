@@ -1,24 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faLock } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
 
 const Login = () => {
   const [error, setError] = useState(false);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/account/success", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.body) {
-          window.location.href = "/";
-        }
-      });
-  }, []);
-
-  const login = async () => {
+  const authenticate = async () => {
     const name = document.querySelector("#login-name").value;
     const password = document.querySelector("#login-password").value;
     try {
@@ -37,11 +26,12 @@ const Login = () => {
         }
       );
       const data = await response.json();
-      console.log(data.data.user.VAITRO)
+      console.log(data.data.user)
       const roles = data.data.user.VAITRO;
-      if (roles == "Brand") {
+      if (roles === "Brand") {
         window.location.href = "/brand";
-      } else if (roles == "Admin") {
+      } else if (roles === "Admin") {
+        localStorage.setItem("userData",JSON.stringify(data.data.user));
         window.location.href = "/admin/dashboard"
       } else {
         setError(true);
@@ -53,7 +43,7 @@ const Login = () => {
 
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
-      login();
+      authenticate();
     }
   };
 
@@ -89,7 +79,7 @@ const Login = () => {
             Something's incorrect! Please try again
           </div>
         )}
-        <button onClick={login} className="submit-btn">
+        <button onClick={authenticate} className="submit-btn">
           LOGIN
         </button>
       </div>

@@ -1,25 +1,29 @@
 import { Outlet } from "react-router-dom";
 import AdminHeader from "./AdminHeader/AdminHeader";
 import AdminNavbar from "./AdminNavbar/AdminNavbar";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 const AdminLayout = () => {
   const navigate = useNavigate();
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("userData")));
+
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/account/success", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.body) {
-          if (json.body.Role !== "admin") {
-            navigate("/");
-          }
-        } else {
-          navigate("/");
-        }
-      });
-  }, []);
+    try{
+      if(!userData){
+        console.log("Unauthorized!");
+        navigate("/");
+      }
+      if(userData.VAITRO !== "Admin"){
+        console.log("Access Denied!", userData);
+        navigate("/");
+      }
+    }catch(error){
+      console.log(error);
+      navigate("/");
+    }
+
+  }, [userData]);
+
   const bodyStyle = {
     display: "flex",
   };
