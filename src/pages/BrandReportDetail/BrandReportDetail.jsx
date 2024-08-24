@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./BrandReportDetail.css";
+import moment from "moment"
+
+const formatDate = (dateString) => {
+  return moment.parseZone(dateString).format('MMMM D, YYYY h:mm A');
+};
 
 function BrandReportDetail() {
   const { id } = useParams();
@@ -51,10 +56,10 @@ function BrandReportDetail() {
         <h1 className="report-detail-name">{reportData.TENSUKIEN}</h1>
         <p className="report-detail-type">Type: {reportData.LOAITROCHOI}</p>
         <p className="report-detail-dates">
-          Start Date: {new Date(reportData.TGBATDAU).toLocaleString()}
+          Start Date: {formatDate(reportData.TGBATDAU)}
         </p>
         <p className="report-detail-dates">
-          End Date: {new Date(reportData.TGKETTHUC).toLocaleString()}
+          End Date:  {formatDate(reportData.TGKETTHUC)}
         </p>
         <p className="report-detail-players">Players Joined: {reportData.playersJoined || 'N/A'}</p>
         <p className="report-detail-vouchers">
