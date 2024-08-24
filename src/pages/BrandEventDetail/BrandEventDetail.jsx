@@ -5,6 +5,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import VoucherModal from "./VoucherModal";
 import axios from "axios";
+import moment from "moment"
+
+const formatDate = (dateString) => {
+  return moment.parseZone(dateString).format('MMMM D, YYYY h:mm A');
+};
 
 function BrandDetail() {
   const { id } = useParams(); // Get the event ID from the URL
@@ -66,6 +71,10 @@ function BrandDetail() {
     }
   };
 
+  const handleEditEvent = () => {
+    window.location.href = `/edit/${id}`;
+  };
+
   if (!currentEvent) {
     return <div>Loading...</div>;
   }
@@ -77,13 +86,13 @@ function BrandDetail() {
         <h1 className="event-detail-name">{currentEvent.TENSUKIEN}</h1>
         <p className="event-detail-type">Type: {currentEvent.LOAITROCHOI}</p>
         <p className="event-detail-vouchers">Total Vouchers: {totalVouchers || 'N/A'}</p>
-        <p className="event-detail-dates">Start Date: {new Date(currentEvent.TGBATDAU).toLocaleString()}</p>
-        <p className="event-detail-dates">End Date: {new Date(currentEvent.TGKETTHUC).toLocaleString()}</p>
+        <p className="event-detail-dates">Start Date: {formatDate(currentEvent.TGBATDAU)}</p>
+        <p className="event-detail-dates">End Date: {formatDate(currentEvent.TGKETTHUC)}</p>
         <div className="event-detail-buttons">
           <button className="event-detail-button" onClick={handleOpenModal}>
             <FontAwesomeIcon icon={faEdit} /> Add Voucher
           </button>
-          <button className="event-detail-button">
+          <button className="event-detail-button" onClick={handleEditEvent}>
             <FontAwesomeIcon icon={faEdit} /> Edit Event
           </button>
         </div>
