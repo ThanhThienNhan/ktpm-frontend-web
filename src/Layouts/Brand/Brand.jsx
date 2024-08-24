@@ -8,22 +8,26 @@ const Brand = () => {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState({});
   const [userChange, changeUser] = useState(false);
-  //   useEffect(() => {
-  //     fetch("http://localhost:1234/api/v1/...", {
-  //       credentials: "include",
-  //     })
-  //       .then((res) => res.json())
-  //       .then((json) => {
-  //         if (json.body) {
-  //           if (json.body.Role === "admin") {
-  //             navigate("/admin");
-  //           }
-  //           setUserInfo(json.body);
-  //         } else {
-  //           setUserInfo(null);
-  //         }
-  //       });
-  //   }, [userChange]);
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("userData")));
+
+  useEffect(() => {
+    console.log(userData);
+    try{
+      if(!userData){
+        console.log("Unauthorized!");
+        navigate("/");
+      }
+      if(userData.VAITRO !== "Brand"){
+        console.log("Access Denied!", userData);
+        navigate("/");
+      }
+    }catch(error){
+      console.log(error);
+      navigate("/");
+    }
+
+  }, [userData]);
+
   return (
     <>
       <div className="brand-container">

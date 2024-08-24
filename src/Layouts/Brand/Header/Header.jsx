@@ -28,16 +28,8 @@ const Header = ({ userInfo, setUserInfo }) => {
     }, []);
 
     const logOut = () => {
-        // fetch("http://localhost:1234/api/v1/user/account/logout", {
-        //     credentials: "include",
-        // })
-        //     .then((res) => res.json())
-        //     .then((json) => {
-        //         if (json.message === "Logout successful") {
-        //             setUserInfo(null);
-        //             navigate("/");
-        //         }
-        //     });
+        localStorage.clear();
+        navigate("/");
     };
 
     const handleKeyPress = (event) => {

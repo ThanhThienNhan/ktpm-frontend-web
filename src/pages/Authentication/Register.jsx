@@ -22,7 +22,7 @@ const Register = () => {
             };
             try {
                 if (password == confirmedPassword) {
-                    const response = await fetch("http://localhost:2999/auth/v1/api/auth/signup", {
+                    const response = await fetch("http://localhost:2999/auth/v1/api/auth/signup-brand", {
                         credentials: "include",
                         headers: {
                             "Content-Type": "application/json",

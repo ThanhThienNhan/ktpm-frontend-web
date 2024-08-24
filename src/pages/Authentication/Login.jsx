@@ -29,6 +29,7 @@ const Login = () => {
       console.log(data.data.user)
       const roles = data.data.user.VAITRO;
       if (roles === "Brand") {
+        localStorage.setItem("userData",JSON.stringify(data.data.user));
         window.location.href = "/brand";
       } else if (roles === "Admin") {
         localStorage.setItem("userData",JSON.stringify(data.data.user));
