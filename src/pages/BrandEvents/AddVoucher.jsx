@@ -5,9 +5,11 @@ import axios from 'axios';
 import DropzoneBrand from "../../../components/DropzoneBrand";
 import "./AddVoucher.css";
 import { toast } from 'react-toastify';
+import { useBrand } from '../../BrandContext';
 
 const AddVoucher = () => {
     const [imageFile, setImageFile] = useState(undefined);
+    const { brandId } = useBrand();
 
     const validationSchema = Yup.object({
         expirationDate: Yup.date().required('Required'),
@@ -17,7 +19,7 @@ const AddVoucher = () => {
 
     const handleSubmit = async (values, { resetForm }) => {
         const formData = new FormData();
-        formData.append('ID_THUONGHIEU', '1'); // Temp ID 1
+        formData.append('ID_THUONGHIEU', brandId);
         formData.append('NGAYHETHAN', values.expirationDate);
         formData.append('TRIGIA', values.price);
         formData.append('MOTA', values.description);

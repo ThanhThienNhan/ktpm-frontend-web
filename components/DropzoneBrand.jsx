@@ -9,6 +9,9 @@ const Dropzone = ({ field, setFieldValue }) => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
+  const isFile = field instanceof File;
+  const isString = typeof field === 'string';
+
   return (
     <div {...getRootProps()} className="dropzone">
       <input {...getInputProps()} />
@@ -19,11 +22,19 @@ const Dropzone = ({ field, setFieldValue }) => {
           <button type="button" className="select-button">Select</button>
         </div>
       )}
-      {field && (
+      {isFile && (
         <img
           className="Image-display"
           id="DroppedImage"
           src={URL.createObjectURL(field)} // Create a temporary URL to preview image
+          alt="Uploaded"
+        />
+      )}
+      {isString && (
+        <img
+          className="Image-display"
+          id="DroppedImage"
+          src={field} // Directly use the URL for the image
           alt="Uploaded"
         />
       )}

@@ -2,14 +2,16 @@ import React, { useState, useEffect } from "react";
 import EventShelf from "../../../components/EventShelf";
 import BrandPagination from "../../../components/BrandPagination";
 import "./BrandReports.css";
+import { useBrand } from '../../BrandContext';
+
 
 const BrandReports = () => {
     const [events, setEvents] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 8;
     const [totalPages, setTotalPages] = useState(1);
-    const brandId = 1;  // Temporary idThuongHieu set to 1
-
+    const { brandId } = useBrand();
+    
     useEffect(() => {
         // Fetch events when the component mounts
         fetch(`http://localhost:2999/brand/api/v1/event/past/${brandId}`)

@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./BrandEventDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import VoucherModal from "./VoucherModal";
 import axios from "axios";
-import moment from "moment"
+import moment from "moment";
+import { useBrand } from '../../BrandContext';
 
 const formatDate = (dateString) => {
   return moment.parseZone(dateString).format('MMMM D, YYYY h:mm A');
 };
 
 function BrandDetail() {
-  const BrandId=1; //Temp Id
+  const { brandId } = useBrand();
   const { id } = useParams(); // Get the event ID from the URL
+  const navigate = useNavigate();
   const [currentEvent, setCurrentEvent] = useState(null);
   const [vouchers, setVouchers] = useState([]);
   const [totalVouchers, setTotalVouchers] = useState(0);
@@ -24,6 +26,13 @@ function BrandDetail() {
       try {
         const response = await fetch(`http://localhost:2999/brand/api/v1/event/${id}`);
         const data = await response.json();
+
+        if (data.ID_THUONGHIEU !== brandId) {
+          // Redirect to an unauthorized page or show an error
+          navigate("/unauthorized");
+          return;
+        }
+
         setCurrentEvent(data);
       } catch (error) {
         console.error("Error fetching event data:", error);
@@ -31,7 +40,7 @@ function BrandDetail() {
     };
 
     fetchEvent();
-  }, [id]);
+  }, [id, brandId, navigate]);
 
   useEffect(() => {
     const fetchVouchers = async () => {
@@ -98,7 +107,7 @@ function BrandDetail() {
           </button>
         </div>
       </div>
-      <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleAddOrUpdateVouchers} brandId={BrandId} />
+      <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleAddOrUpdateVouchers} eventId={id} brandId={brandId} />
     </div>
   );
 }

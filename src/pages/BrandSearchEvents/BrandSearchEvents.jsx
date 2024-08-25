@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import EventShelf from "../../../components/EventShelf";
+import { useBrand } from '../../BrandContext';
 
 const BrandSearchEvents = () => {
     const { word } = useParams();
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-
+    const { brandId } = useBrand();
     useEffect(() => {
         const fetchEvents = async () => {
             try {
                 setLoading(true);
-                const response = await fetch(`http://localhost:2999/brand/api/v1/event/search?term=${encodeURIComponent(word)}`);
+                const response = await fetch(`http://localhost:2999/brand/api/v1/event/search/${brandId}?term=${encodeURIComponent(word)}`);
                 if (!response.ok) {
                     throw new Error('Response was not ok');
                 }
