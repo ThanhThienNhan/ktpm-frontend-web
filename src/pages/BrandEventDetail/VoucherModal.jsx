@@ -7,7 +7,7 @@ const formatPrice = (price) => {
   return price.toLocaleString('vi-VN') + ' đ';
 };
 
-const VoucherModal = ({ isOpen, onClose, onSave, brandId }) => {
+const VoucherModal = ({ isOpen, onClose, onSave, eventId, brandId }) => {
   const [vouchers, setVouchers] = useState([]);
   const [selectedVouchers, setSelectedVouchers] = useState({});
   const [checkedVouchers, setCheckedVouchers] = useState({});
@@ -58,7 +58,7 @@ const VoucherModal = ({ isOpen, onClose, onSave, brandId }) => {
   const handleSubmit = async () => {
     const result = Object.keys(selectedVouchers).map(id => ({
       ID_VOUCHER: parseInt(id),
-      ID_SUKIEN: brandId, // Event ID
+      ID_SUKIEN: eventId, // Event ID
       SOLUONGVOUCHER: parseInt(selectedVouchers[id])
     }));
 

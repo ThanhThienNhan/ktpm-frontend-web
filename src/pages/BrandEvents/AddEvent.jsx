@@ -5,9 +5,12 @@ import axios from 'axios';
 import DropzoneBrand from "../../../components/DropzoneBrand";
 import "./AddEvent.css";
 import { toast } from 'react-toastify';
+import { useBrand } from '../../BrandContext';
+
 
 const AddEvent = () => {
     const [imageFile, setImageFile] = useState(undefined);
+    const { brandId } = useBrand();
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Required'),
@@ -18,7 +21,7 @@ const AddEvent = () => {
 
     const handleSubmit = async (values, { resetForm }) => {
         const formData = new FormData();
-        formData.append('ID_THUONGHIEU', '1'); // Temp ID 1
+        formData.append('ID_THUONGHIEU', brandId); // Temp ID 1
         formData.append('name', values.name);
         formData.append('startDate', values.startDate);
         formData.append('endDate', values.endDate);
