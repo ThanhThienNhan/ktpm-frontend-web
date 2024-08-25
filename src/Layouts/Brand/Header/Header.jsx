@@ -77,13 +77,13 @@ const Header = ({ userInfo, setUserInfo }) => {
                             <div className="dropdown-menu" id="avt-dropdown">
                                 <Link to="/brand/brand-info">Profile</Link>
                                 <hr />
-                                <Link onClick={logOut}>
+                                <button onClick={logOut}>
                                     <FontAwesomeIcon
                                         icon={faRightFromBracket}
                                         className="profile-ico"
                                     />
                                     Sign out
-                                </Link>
+                                </button>
                             </div>
                         )}
                     </div>

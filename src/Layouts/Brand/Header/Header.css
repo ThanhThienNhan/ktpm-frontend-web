@@ -157,3 +157,24 @@ header {
 .head-login-ico {
     margin-left: 10px;
 }
+
+.dropdown-menu button {
+    background-color: #f8f8f8; /* Background color of the button */
+    border: none; /* Remove default border */
+    border-radius: 12px; /* Rounded corners */
+    padding: 10px 15px; /* Padding inside the button */
+    font-size: 18px; /* Font size */
+    color: #068DA9; /* Text color */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+
+.dropdown-menu button:hover {
+    background-color: #068DA9; /* Background color on hover */
+    color: #f8f8f8; /* Text color on hover */
+}
+
+.dropdown-menu button:active {
+    background-color: #055a7b; /* Darker background on click */
+    color: #f8f8f8; /* Text color on click */
+}
