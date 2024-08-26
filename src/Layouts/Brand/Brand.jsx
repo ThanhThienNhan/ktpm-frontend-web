@@ -21,7 +21,6 @@ const Brand = () => {
           const data = await response.json();
           if (data) {
             setBrandId(data.ID_THUONGHIEU);
-            console.log("AAA",data.ID_THUONGHIEU)
           } else {
             console.log("No brand found for this user");
             navigate("/");

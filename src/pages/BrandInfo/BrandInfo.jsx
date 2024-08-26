@@ -4,74 +4,89 @@ import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./BrandInfo.css";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useBrand } from '../../BrandContext';
 
 const BrandInfo = () => {
-  const [brandInfo, setBrandInfo] = useState({});
+  const [brandInfo, setBrandInfo] = useState({
+    TENTHUONGHIEU: "",
+    DIACHI: "",
+    LINHVUC: "",
+    AVATAR: "",
+    ID_THUONGHIEU: ""
+  });
   const [isEditMode, setIsEditMode] = useState(false);
-  const [initialState, setInitialState] = useState({});
+  const [initialState, setInitialState] = useState({
+    fullName: "",
+    address: "",
+    brandField: "",
+    AVATAR: ""
+  });
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
   const [brandField, setBrandField] = useState("");
   const [changeAvt, setChangeAvt] = useState(null);
+  const { brandId } = useBrand();
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/brand/account/success", {
-      credentials: "include",
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        if (json.body) {
-          setFullName(json.body.FullName);
-          setAddress(json.body.Address);
-          setBrandField(json.body.BrandField);
-          setBrandInfo(json.body);
-        } else {
-          navigate("/");
-        }
-      });
-  }, [isEditMode]);
+    if (brandId) {
+      fetch("http://localhost:2999/brand/api/v1/brand/getBrandInfo", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ BrandId: brandId }),
+      })
+        .then((res) => res.json())
+        .then((json) => {
+          if (json) {
+            setFullName(json.TENTHUONGHIEU || "");
+            setAddress(json.DIACHI || "");
+            setBrandField(json.LINHVUC || "");
+            setBrandInfo({
+              ...json,
+              TENTHUONGHIEU: json.TENTHUONGHIEU || "",
+              DIACHI: json.DIACHI || "",
+              LINHVUC: json.LINHVUC || "",
+              AVATAR: json.AVATAR || ""
+            });
+            setInitialState({
+              fullName: json.TENTHUONGHIEU || "",
+              address: json.DIACHI || "",
+              brandField: json.LINHVUC || "",
+              AVATAR: json.AVATAR || ""
+            });
+          } else {
+            navigate("/");
+          }
+        })
+        .catch((error) => console.error("Error fetching brand info:", error));
+    }
+
+
+  }, [brandId, navigate]);
 
   const saveInfoChanges = async () => {
-    let formData = new FormData();
-    formData.append("fullname", fullName);
-    formData.append("address", address);
-    formData.append("brandField", brandField);
-    formData.append("image", changeAvt);
+    const formData = new FormData();
+    formData.append("BrandId", brandInfo.ID_THUONGHIEU);
+    formData.append("TENTHUONGHIEU", fullName);
+    formData.append("DIACHI", address);
+    formData.append("LINHVUC", brandField);
+    if (changeAvt) {
+      formData.append("image", changeAvt);
+    }
 
     try {
-      const response = await fetch(
-        `http://localhost:8000/api/v1/brand/${brandInfo._id}`,
-        {
-          method: "PATCH",
-          body: formData,
-        }
-      );
+      const response = await fetch("http://localhost:2999/brand/api/v1/brand/updateBrandInfo", {
+        method: "PUT",
+        body: formData,
+      });
 
       if (response.ok) {
-        toast.success("Successfully updated brand information", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.success("Successfully updated brand information");
         setIsEditMode(false);
       } else {
-        toast.error("There was an error updating the information. Please try again.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "colored",
-        });
+        toast.error("There was an error updating the information. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -84,25 +99,21 @@ const BrandInfo = () => {
       setChangeAvt(file);
       const reader = new FileReader();
       reader.onloadend = () => {
-        setBrandInfo({ ...brandInfo, Image_Avatar: reader.result });
+        setBrandInfo(prevState => ({ ...prevState, AVATAR: reader.result }));
       };
       reader.readAsDataURL(file);
     } else {
-      toast.error("Please select a valid image file", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "colored",
-      });
+      toast.error("Please select a valid image file");
     }
   };
 
   const handleEditMode = () => {
-    setInitialState({ fullName, address, brandField, Image_Avatar: brandInfo.Image_Avatar });
+    setInitialState({
+      fullName,
+      address,
+      brandField,
+      AVATAR: brandInfo.AVATAR,
+    });
     setIsEditMode(true);
   };
 
@@ -110,7 +121,7 @@ const BrandInfo = () => {
     setFullName(initialState.fullName);
     setAddress(initialState.address);
     setBrandField(initialState.brandField);
-    setBrandInfo({ ...brandInfo, Image_Avatar: initialState.Image_Avatar });
+    setBrandInfo(prevState => ({ ...prevState, AVATAR: initialState.AVATAR }));
     setIsEditMode(false);
   };
 
@@ -121,8 +132,8 @@ const BrandInfo = () => {
         <div className="info--avt">
           <div
             className="avatar-big"
-            style={{ backgroundImage: `url(${brandInfo.Image_Avatar})` }}
-          ></div>
+            style={{ backgroundImage: `url(${brandInfo.AVATAR})` }}
+          />
           {isEditMode && (
             <>
               <label htmlFor="info--avt-upload" className="info--avt-change">
@@ -132,9 +143,9 @@ const BrandInfo = () => {
               <input
                 type="file"
                 id="info--avt-upload"
-                accept="image/*" // Only accept image
+                accept="image/*"
                 onChange={handleAvatarChange}
-                style={{ display: 'none' }} // Hide the file input
+                style={{ display: 'none' }}
               />
             </>
           )}
@@ -152,7 +163,7 @@ const BrandInfo = () => {
               readOnly={!isEditMode}
             />
           </div>
-          
+
           <div className="info-field">
             <h3 className="title-input">Address</h3>
             <input
