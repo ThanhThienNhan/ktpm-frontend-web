@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import "./BrandEventDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faEdit,faEye } from "@fortawesome/free-solid-svg-icons";
 import VoucherModal from "./VoucherModal";
+import ViewVouchersModal from "./ViewVouchersModal";
 import axios from "axios";
 import moment from "moment";
 import { useBrand } from '../../BrandContext';
@@ -14,12 +15,13 @@ const formatDate = (dateString) => {
 
 function BrandDetail() {
   const { brandId } = useBrand();
-  const { id } = useParams(); // Get the event ID from the URL
+  const { id } = useParams();
   const navigate = useNavigate();
   const [currentEvent, setCurrentEvent] = useState(null);
   const [vouchers, setVouchers] = useState([]);
   const [totalVouchers, setTotalVouchers] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false); 
 
   useEffect(() => {
     const fetchEvent = async () => {
@@ -28,8 +30,7 @@ function BrandDetail() {
         const data = await response.json();
 
         if (data.ID_THUONGHIEU !== brandId) {
-          // Redirect to an unauthorized page or show an error
-          navigate("/unauthorized");
+          //navigate("/unauthorized");
           return;
         }
 
@@ -62,6 +63,9 @@ function BrandDetail() {
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
+
+  const handleOpenViewModal = () => setIsViewModalOpen(true);
+  const handleCloseViewModal = () => setIsViewModalOpen(false);
 
   const handleAddOrUpdateVouchers = async (newVouchers) => {
     try {
@@ -102,12 +106,16 @@ function BrandDetail() {
           <button className="event-detail-button" onClick={handleOpenModal}>
             <FontAwesomeIcon icon={faEdit} /> Add Voucher
           </button>
+          <button className="event-detail-button" onClick={handleOpenViewModal}>
+            <FontAwesomeIcon icon={faEye} /> View Vouchers
+          </button>
           <button className="event-detail-button" onClick={handleEditEvent}>
             <FontAwesomeIcon icon={faEdit} /> Edit Event
           </button>
         </div>
       </div>
       <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleAddOrUpdateVouchers} eventId={id} brandId={brandId} />
+      <ViewVouchersModal isOpen={isViewModalOpen} onClose={handleCloseViewModal} eventId={id} />
     </div>
   );
 }
