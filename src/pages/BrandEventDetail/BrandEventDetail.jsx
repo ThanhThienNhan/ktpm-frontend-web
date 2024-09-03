@@ -89,6 +89,10 @@ function BrandDetail() {
     window.location.href = `/brand/edit/${id}`;
   };
 
+  const handleAddQuiz=()=>{
+    window.location.href=`/brand/add-quiz/${id}`
+  }
+
   if (!currentEvent) {
     return <div>Loading...</div>;
   }
@@ -112,6 +116,11 @@ function BrandDetail() {
           <button className="event-detail-button" onClick={handleEditEvent}>
             <FontAwesomeIcon icon={faEdit} /> Edit Event
           </button>
+          {currentEvent.LOAITROCHOI === "Trivia Quiz" && (
+            <button className="event-detail-button" onClick={handleAddQuiz}>
+              <FontAwesomeIcon icon={faEdit} /> Add Quiz
+            </button>
+          )}
         </div>
       </div>
       <VoucherModal isOpen={isModalOpen} onClose={handleCloseModal} onSave={handleAddOrUpdateVouchers} eventId={id} brandId={brandId} />

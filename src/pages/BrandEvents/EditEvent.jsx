@@ -92,13 +92,13 @@ const EditEvent = () => {
                                     <Field type="datetime-local" name="endDate" />
                                 </div>
 
-                                <div>
+                                {/* <div>
                                     <label className="Field--label">Game Type</label>
                                     <Field as="select" name="gameType">
                                         <option value="Trivia Quiz">Trivia Quiz</option>
                                         <option value="Roll Dice">Roll Dice</option>
                                     </Field>
-                                </div>
+                                </div> */}
 
                                 <div></div>
                                 <DropzoneBrand field={imageFile} setFieldValue={setImageFile} />
