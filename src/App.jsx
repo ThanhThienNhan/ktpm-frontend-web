@@ -24,6 +24,8 @@ import EditEvent from "./pages/BrandEvents/EditEvent";
 import BrandInfo from "./pages/BrandInfo/BrandInfo";
 import BrandSearchEvents from "./pages/BrandSearchEvents/BrandSearchEvents";
 
+import AddQuiz from "./pages/BrandEventDetail/AddQuiz";
+
 // Layouts
 import Admin from "./Layouts/Admin/Admin";
 import Brand from "./Layouts/Brand/Brand";
@@ -70,6 +72,7 @@ function App() {
           <Route path="/brand/search/:word" element={<BrandSearchEvents />} />
 
           <Route path="/brand/edit/:id" element={<EditEvent />} />
+          <Route path="/brand/add-quiz/:id" element={<AddQuiz />} />
 
           <Route path="/brand/reports" element={<BrandReports />} />
           <Route path="/brand/event/:id" element={<BrandEventDetail />} />
