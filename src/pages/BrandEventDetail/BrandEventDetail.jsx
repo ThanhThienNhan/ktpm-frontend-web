@@ -4,7 +4,7 @@ import "./BrandEventDetail.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit,faEye } from "@fortawesome/free-solid-svg-icons";
 import VoucherModal from "./VoucherModal";
-import ViewVouchersModal from "./ViewVouchersModal";
+import ViewVouchersModal from "../../../components/ViewVouchersModal";
 import axios from "axios";
 import moment from "moment";
 import { useBrand } from '../../BrandContext';

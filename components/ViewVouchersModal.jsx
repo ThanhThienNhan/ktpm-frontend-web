@@ -43,6 +43,7 @@ const ViewVouchersModal = ({ isOpen, onClose, eventId }) => {
             <div key={voucher.ID_VOUCHER} className="voucher-item">
               <div><strong>Value:</strong> {voucher.TRIGIA} VND</div>
               <div><strong>Quantity:</strong> {voucher.SOLUONGVOUCHER}</div>
+              <div><strong>Used:</strong> {voucher.SOLUOTSUDUNG}</div>
               <div><strong>Description:</strong> {voucher.MOTA}</div>
             </div>
           ))}

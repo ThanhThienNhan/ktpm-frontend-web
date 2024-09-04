@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./BrandReportDetail.css";
-import moment from "moment"
+import moment from "moment";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import ViewVouchersModal from "../../../components/ViewVouchersModal";
 
 const formatDate = (dateString) => {
   return moment.parseZone(dateString).format('MMMM D, YYYY h:mm A');
@@ -13,6 +16,7 @@ function BrandReportDetail() {
   const [voucherData, setVoucherData] = useState([]);
   const [totalVouchers, setTotalVouchers] = useState(0);
   const [vouchersUsed, setVouchersUsed] = useState(0);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
 
   useEffect(() => {
     const fetchReportData = async () => {
@@ -31,7 +35,6 @@ function BrandReportDetail() {
         const data = await response.json();
         setVoucherData(data);
 
-        // Calculate total vouchers and vouchers used
         const total = data.reduce((acc, voucher) => acc + voucher.SOLUONGVOUCHER, 0);
         setTotalVouchers(total);
         const used = data.reduce((acc, voucher) => acc + voucher.SOLUOTSUDUNG, 0);
@@ -45,8 +48,11 @@ function BrandReportDetail() {
     fetchVoucherData();
   }, [id]);
 
+  const handleOpenViewModal = () => setIsViewModalOpen(true);
+  const handleCloseViewModal = () => setIsViewModalOpen(false);
+
   if (!reportData) {
-    return <div>Loading...</div>; // Show a loading state while data is being fetched
+    return <div>Loading...</div>;
   }
 
   return (
@@ -65,6 +71,9 @@ function BrandReportDetail() {
         <p className="report-detail-vouchers">
           Vouchers Used: {vouchersUsed}/{totalVouchers}
         </p>
+        <button className="report-detail-button" onClick={handleOpenViewModal}>
+          <FontAwesomeIcon icon={faEye} /> View Vouchers
+        </button>
       </div>
       <div className="report-detail-table-container">
         <table className="report-detail-table">
@@ -95,6 +104,7 @@ function BrandReportDetail() {
           </tbody>
         </table>
       </div>
+      <ViewVouchersModal isOpen={isViewModalOpen} onClose={handleCloseViewModal} eventId={id} />
     </div>
   );
 }
