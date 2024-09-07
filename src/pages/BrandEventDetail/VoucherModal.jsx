@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './VoucherModal.css';
 import { toast } from 'react-toastify';
+import moment from 'moment';
+
+const formatDate = (dateString) => {
+  return moment.parseZone(dateString).format('DD/MM/YYYY HH:mm');
+};
 
 const formatPrice = (price) => {
   return price.toLocaleString('vi-VN') + ' đ';
@@ -98,7 +103,7 @@ const VoucherModal = ({ isOpen, onClose, onSave, eventId, brandId }) => {
                   <img src={voucher.HINHANH} alt={voucher.MOTA} className="voucher-image" />
                   <h3>{voucher.MOTA}</h3>
                   <div>Price: {formatPrice(voucher.TRIGIA)}</div>
-                  <div>Expiration Date: {new Date(voucher.NGAYHETHAN).toLocaleDateString()}</div>
+                  <div>Expiration Date: {formatDate(voucher.NGAYHETHAN)}</div>
                   {checkedVouchers[voucher.ID_VOUCHER] && (
                     <input
                       type="number"

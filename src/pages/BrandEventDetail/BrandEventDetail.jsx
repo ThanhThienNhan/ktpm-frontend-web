@@ -10,7 +10,7 @@ import moment from "moment";
 import { useBrand } from '../../BrandContext';
 
 const formatDate = (dateString) => {
-  return moment.parseZone(dateString).format('MMMM D, YYYY h:mm A');
+  return moment.parseZone(dateString).format('DD/MM/YYYY HH:mm');
 };
 
 function BrandDetail() {

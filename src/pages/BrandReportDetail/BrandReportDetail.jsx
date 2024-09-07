@@ -7,7 +7,7 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import ViewVouchersModal from "../../../components/ViewVouchersModal";
 
 const formatDate = (dateString) => {
-  return moment.parseZone(dateString).format('MMMM D, YYYY h:mm A');
+  return moment.parseZone(dateString).format('DD/MM/YYYY HH:mm');
 };
 
 function BrandReportDetail() {
