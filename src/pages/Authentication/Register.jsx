@@ -149,7 +149,7 @@ const Register = () => {
                 </button>
             </div>
             <div className="authen-route">
-                Already have an account? <Link to="/authentication/login">Sign In</Link>
+                Already have an account? <Link to="/">Sign In</Link>
             </div>
         </>
     );
