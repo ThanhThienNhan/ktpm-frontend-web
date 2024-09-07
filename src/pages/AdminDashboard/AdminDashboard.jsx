@@ -16,6 +16,7 @@ function AdminDashboard() {
   const [brandCount, setBrandCount] = useState(0);
   const [eventCount, setEventCount] = useState(0);
   const [loginData, setLoginData] = useState(0);
+  const [topEvents, setTopEvents] = useState();
 
   useEffect(() => {
     //get players count
@@ -62,6 +63,18 @@ function AdminDashboard() {
     .catch((error) => {
       console.error("There was an error fetching login data!", error);
     });
+
+    //get top favorited events data
+    axios.get('http://localhost:2999/user/v1/api/auth/favorite/event/top4') // Replace with your Cloudinary cloud name
+    .then((response) => {
+      setTopEvents(response.data);
+      console.log(response.data);
+    })
+    .catch((error) => {
+      console.error("There was an error fetching login data!", error);
+    });
+
+
   },[])
 
   //login data sample
@@ -86,10 +99,10 @@ function AdminDashboard() {
   ];
 
   const products = [
-    { id: 1, name: 'Weekend Trivia Extravaganza', popularity: 80, sales: 45 },
-    { id: 2, name: 'Lucky Dice Draw', popularity: 60, sales: 29 },
-    { id: 3, name: 'Trivia Night Showdown', popularity: 40, sales: 18 },
-    { id: 4, name: 'Dice Roll Madness', popularity: 20, sales: 25 },
+    { id: 1, name: 'Weekend Trivia Extravaganza', sales: 45 },
+    { id: 2, name: 'Lucky Dice Draw', sales: 29 },
+    { id: 3, name: 'Trivia Night Showdown', sales: 18 },
+    { id: 4, name: 'Dice Roll Madness', sales: 25 },
   ];
 
   const mapChartSampleData = [
@@ -163,8 +176,9 @@ function AdminDashboard() {
           </LineChart> 
         </div>
       </div>
+
       <div className='stats-banner' style={{height:300}}>
-        <TopProductsListView data={products}/>
+        {topEvents && <TopProductsListView data={topEvents}/>}
       </div>
     </div>
   )
