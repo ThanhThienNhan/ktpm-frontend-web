@@ -18,18 +18,18 @@ export default function EditUser() {
     EMAIL: '',
     MATKHAU: '',
     TRANGTHAI: 'Active',
+    AVATAR: ''
   });
   const [imageFile, setImageFile] = useState();
-  const [oldAvatar,setOldAvatar] = useState();
-  const [avatar,setAvatar] = useState("");
   const [error, setError] = useState(null);
-
+  
   useEffect(() => {
     // Fetch data from API
     if (username) {
       axios.get(`http://localhost:2999/user/v1/api/auth/users/info/${username}`)
         .then(response => {
           const userData = response.data;
+          console.log("User data: ", userData)
           setInitialValues({
             TENDANGNHAP: userData.TENDANGNHAP,
             VAITRO: userData.VAITRO,
@@ -38,30 +38,30 @@ export default function EditUser() {
             MATKHAU: userData.MATKHAU,
             TRANGTHAI: userData.TRANGTHAI,
           });
-          setAvatar(userData.AVATAR)
-          console.log("Avatar: ", avatar);
+          if(userData.AVATAR !== null && userData.AVATAR !== undefined && userData.AVATAR !== ""){
+            //axios.get(`http://localhost:2999/user/v1/api/auth/images/image/${avatar}`)
+            //.then(response => {
+            //  const imageData = response.data;
+            //  setImageFile(imageData.secure_url);
+            //}).catch(error => {
+            //  console.error('Error fetching user image:', error);
+            //  setError("There was an error fetching user image. Check your connection.");
+            //});
+            setImageFile(userData.AVATAR);
+          }
         })
         .catch(error => {
           console.error('Error fetching user data:', error);
           setError("There was an error fetching user data. Check your connection.");
         });
       
-      if(avatar !== null && avatar !== undefined && avatar !== ""){
-        //axios.get(`http://localhost:2999/user/v1/api/auth/images/image/${avatar}`)
-        //.then(response => {
-        //  const imageData = response.data;
-        //  setImageFile(imageData.secure_url);
-        //}).catch(error => {
-        //  console.error('Error fetching user image:', error);
-        //  setError("There was an error fetching user image. Check your connection.");
-        //});
-        setImageFile(avatar);
-      }
+      
         
     }//
-  }, [username,avatar]);
+  }, []);
 
   function handleImageFile(base64data){
+    console.log(base64data);
     const formData = new FormData();
     formData.append('file', base64data);
     formData.append('upload_preset', 'my-preset'); // Replace with your Cloudinary upload preset
@@ -71,8 +71,6 @@ export default function EditUser() {
     .then((response) => {
       console.log("Image Uploaded!");
       setImageFile(response.data.secure_url);
-      setAvatar(response.data.secure_url);
-      setOldAvatar(response.data.secure_url);
     })
     .catch((error) => {
       console.error("There was an error uploading the image!", error);
@@ -95,7 +93,7 @@ export default function EditUser() {
   });
 
   const onSubmit = (values) => {
-    const data = JSON.stringify({...values,AVATAR: avatar});
+    const data = JSON.stringify({...values,AVATAR: imageFile});
     axios.put(`http://localhost:2999/user/v1/api/auth/users/edit/${username}`, data, {
       headers: {
         'Content-Type': 'application/json'

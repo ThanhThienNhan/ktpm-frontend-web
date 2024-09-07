@@ -4,7 +4,17 @@ import { useDropzone } from 'react-dropzone';
 const Dropzone = ({ field, setFieldValue }) => {
   const onDrop = React.useCallback((acceptedFiles) => {
     const file = acceptedFiles[0];
-    setFieldValue(file); // Directly set the file object
+    //setFieldValue(file); // Directly set the file object
+    //console.log(acceptedFiles);
+
+    const reader = new FileReader();
+    
+    reader.onloadend = () => {
+      setFieldValue(reader.result); // Set the base64 string
+    };
+    
+    reader.readAsDataURL(file); // Read the file as a data URL
+    //console.log(acceptedFiles);
   }, [setFieldValue]);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });

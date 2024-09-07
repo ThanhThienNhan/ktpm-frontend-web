@@ -61,7 +61,7 @@ function App() {
             path="/admin/game-management"
             element={<AdminGameManagement />}
           />
-          <Route path="admin/game-management/:id" element={<EditGame />} />
+          <Route path="/admin/game-management/:gameId" element={<EditGame />} />
           <Route path="/admin/game-management/new" element={<EditGame />} />
         </Route>
         {/*Brand*/}

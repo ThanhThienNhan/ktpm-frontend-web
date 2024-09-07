@@ -18,7 +18,7 @@ export default function GameTableView(props){
             </tr>
           </thead>
           <tbody>
-            {data.map((game, index) => (
+            {data && data.map((game, index) => (
               <tr key={index}>
                 <td>{game.name}</td>
                 <td>{game.type}</td>

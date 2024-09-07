@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDropzone } from 'react-dropzone';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
@@ -21,28 +21,26 @@ function AdminGameManagement() {
       instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
       imageFile: ""
     },
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 1, name: "Trivia Blast", type: "Trivia Quiz", exchangable: "No", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-    {id: 2, name: "Lắc Xì", type: "Shake Phone", exchangable: "Yes", instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", imageFile: ""},
-  ];
+    {id: 2, 
+      name: "Lắc Xì", 
+      type: "Shake Phone", 
+      exchangable: "Yes", 
+      instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
+      imageFile: ""},
+    ];
 
-  const [games,setGames] = useState(data);
+  const [games, setGames] = useState();
   
   let navigate = useNavigate();
+
+  useEffect(() => {
+    const gameData = JSON.parse(localStorage.getItem("gameData"));
+    if(!gameData){
+      localStorage.setItem("gameData",JSON.stringify(data));
+    }else{
+      setGames(gameData);
+    }
+  }, [])
 
   function editGame(id){
     navigate(`/admin/game-management/${id}`);
@@ -54,7 +52,7 @@ function AdminGameManagement() {
 
   function deleteGame(id){
     //make API call
-    
+  
   }
 
   function changePage(number){
@@ -64,9 +62,9 @@ function AdminGameManagement() {
 
   return (
     <div className="GameManagement">
-      <div style={{height: "50px"}}>
+      {/* <div style={{height: "50px"}}>
         <button className='Button'onClick={newGame} >Add new game</button>
-      </div>
+      </div> */}
       <GameTableView data={games} onDelete={deleteGame} onEdit={editGame} />
       <PaginationBar totalPages={totalPages} onPageChange={changePage}/>
     </div>
