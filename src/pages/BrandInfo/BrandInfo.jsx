@@ -3,7 +3,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import "./BrandInfo.css";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useBrand } from '../../BrandContext';
 
 const BrandInfo = () => {
@@ -62,8 +61,6 @@ const BrandInfo = () => {
         })
         .catch((error) => console.error("Error fetching brand info:", error));
     }
-
-
   }, [brandId, navigate]);
 
   const saveInfoChanges = async () => {
@@ -83,10 +80,10 @@ const BrandInfo = () => {
       });
 
       if (response.ok) {
-        toast.success("Successfully updated brand information");
         setIsEditMode(false);
+        window.location.reload();
       } else {
-        toast.error("There was an error updating the information. Please try again.");
+        console.error("There was an error updating the information. Please try again.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -103,7 +100,7 @@ const BrandInfo = () => {
       };
       reader.readAsDataURL(file);
     } else {
-      toast.error("Please select a valid image file");
+      console.error("Please select a valid image file");
     }
   };
 
