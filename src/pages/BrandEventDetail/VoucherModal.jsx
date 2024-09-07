@@ -61,16 +61,22 @@ const VoucherModal = ({ isOpen, onClose, onSave, eventId, brandId }) => {
   };
 
   const handleSubmit = async () => {
-    const result = Object.keys(selectedVouchers).map(id => ({
-      ID_VOUCHER: parseInt(id),
-      ID_SUKIEN: eventId, // Event ID
-      SOLUONGVOUCHER: parseInt(selectedVouchers[id])
-    }));
+    // Filter out unchecked vouchers and those with empty quantities
+    const result = Object.keys(selectedVouchers).reduce((acc, id) => {
+      if (checkedVouchers[id] && selectedVouchers[id]) {
+        acc.push({
+          ID_VOUCHER: parseInt(id),
+          ID_SUKIEN: eventId, // Event ID
+          SOLUONGVOUCHER: parseInt(selectedVouchers[id])
+        });
+      }
+      return acc;
+    }, []);
 
     if (result.length > 0) {
       try {
         await onSave(result);
-        toast.success('Vouchers updated successfully!'); 
+        toast.success('Vouchers updated successfully!');
       } catch (err) {
         toast.error('Failed to update vouchers.');
       }

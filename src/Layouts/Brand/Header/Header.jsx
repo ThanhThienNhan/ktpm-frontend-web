@@ -3,11 +3,33 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch, faRightFromBracket, faRightToBracket } from '@fortawesome/free-solid-svg-icons';
 import "./Header.css";
+import { useBrand } from '../../../BrandContext';
 
 const Header = ({ userInfo, setUserInfo }) => {
-    const navigate = useNavigate();
     const [showAvtDropdown, setShowAvtDropdown] = useState(false);
     const [searchField, setSearchField] = useState("");
+    const [brandAvatar, setBrandAvatar] = useState("");
+    const { brandId } = useBrand();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (brandId) {
+            fetch("http://localhost:2999/brand/api/v1/brand/getBrandInfo", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ BrandId: brandId }),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    if (json && json.AVATAR) {
+                        setBrandAvatar(json.AVATAR);
+                    }
+                })
+                .catch((error) => console.error("Error fetching brand info:", error));
+        }
+    }, [brandId]);
 
     const showAvatarDropdown = () => {
         setShowAvtDropdown(!showAvtDropdown);
@@ -29,6 +51,7 @@ const Header = ({ userInfo, setUserInfo }) => {
 
     const logOut = () => {
         localStorage.clear();
+        setUserInfo(null);
         navigate("/");
     };
 
@@ -70,7 +93,7 @@ const Header = ({ userInfo, setUserInfo }) => {
                 <>
                     <div
                         className="avt-dropdown-btn"
-                        style={{ backgroundImage: `url(${userInfo.Image_Avatar})` }}
+                        style={{ backgroundImage: `url(${brandAvatar || userInfo.Image_Avatar})` }}
                         onClick={showAvatarDropdown}
                     >
                         {showAvtDropdown && (
