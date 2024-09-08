@@ -67,42 +67,12 @@ function BrandReportDetail() {
         <p className="report-detail-dates">
           End Date:  {formatDate(reportData.TGKETTHUC)}
         </p>
-        <p className="report-detail-players">Players Joined: {reportData.playersJoined || 'N/A'}</p>
         <p className="report-detail-vouchers">
           Vouchers Used: {vouchersUsed}/{totalVouchers}
         </p>
         <button className="report-detail-button" onClick={handleOpenViewModal}>
           <FontAwesomeIcon icon={faEye} /> View Vouchers
         </button>
-      </div>
-      <div className="report-detail-table-container">
-        <table className="report-detail-table">
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {[
-              { "username": "JackAnderson", "points": 240 },
-              { "username": "DavidBrown", "points": 150 },
-              { "username": "HannahMoore", "points": 120 },
-              { "username": "EveDavis", "points": 90 },
-              { "username": "BobSmith", "points": 60 },
-              { "username": "CarolJohnson", "points": 45 },
-              { "username": "FrankMiller", "points": 35 },
-              { "username": "AliceGreen", "points": 30 },
-              { "username": "GraceWilson", "points": 20 },
-              { "username": "IanTaylor", "points": 10 }
-            ].map((data, index) => (
-              <tr key={index}>
-                <td>{data.username}</td>
-                <td>{data.points}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       </div>
       <ViewVouchersModal isOpen={isViewModalOpen} onClose={handleCloseViewModal} eventId={id} />
     </div>
