@@ -8,7 +8,6 @@ import './BrandEvents.css';
 const BrandEvents = () => {
     const navigate = useNavigate();
     const { brandId } = useBrand();
-    console.log("BRANDID",brandId)
     const [events, setEvents] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const eventsPerPage = 8;
@@ -61,16 +60,22 @@ const BrandEvents = () => {
                 </button>
             </div>
 
-            <EventShelf events={selectedEvents} />
+            {events.length > 0 ? (
+                <>
+                    <EventShelf events={selectedEvents} />
 
-            <div className="brand-events-pagination-container">
-                <BrandPagination
-                    className="brand-events-pagination"
-                    totalPages={totalPages}
-                    currentPage={currentPage}
-                    onPageChange={handlePageChange}
-                />
-            </div>
+                    <div className="brand-events-pagination-container">
+                        <BrandPagination
+                            className="brand-events-pagination"
+                            totalPages={totalPages}
+                            currentPage={currentPage}
+                            onPageChange={handlePageChange}
+                        />
+                    </div>
+                </>
+            ) : (
+                <p className="brand-events-no-events-message">There are no events yet</p>
+            )}
         </div>
     );
 };

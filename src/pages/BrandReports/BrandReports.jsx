@@ -4,7 +4,6 @@ import BrandPagination from "../../../components/BrandPagination";
 import "./BrandReports.css";
 import { useBrand } from '../../BrandContext';
 
-
 const BrandReports = () => {
     const [events, setEvents] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
@@ -13,18 +12,19 @@ const BrandReports = () => {
     const { brandId } = useBrand();
     
     useEffect(() => {
-        // Fetch events when the component mounts
-        fetch(`http://localhost:2999/brand/api/v1/event/past/${brandId}`)
-            .then(response => response.json())
-            .then(data => {
-                //console.log(data);  // Debugging: log fetched data
-                setEvents(data);
-                setTotalPages(Math.ceil(data.length / eventsPerPage));
-            })
-            .catch(error => {
-                console.error('Error fetching events:', error);
-            });
-    }, [brandId]);  // Add brandId as a dependency to re-fetch if it changes
+        // Fetch past events when the component mounts
+        if (brandId) {
+            fetch(`http://localhost:2999/brand/api/v1/event/past/${brandId}`)
+                .then(response => response.json())
+                .then(data => {
+                    setEvents(data);
+                    setTotalPages(Math.ceil(data.length / eventsPerPage));
+                })
+                .catch(error => {
+                    console.error('Error fetching events:', error);
+                });
+        }
+    }, [brandId]);
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -37,18 +37,22 @@ const BrandReports = () => {
         <div>
             <h2>Reports</h2>
 
-            <EventShelf
-                events={selectedEvents}
-            />
+            {events.length > 0 ? (
+                <>
+                    <EventShelf events={selectedEvents} />
 
-            <div className="brand-reports-pagination-container">
-                <BrandPagination
-                    className="brand-reports-pagination"
-                    totalPages={totalPages}
-                    currentPage={currentPage}
-                    onPageChange={handlePageChange}
-                />
-            </div>
+                    <div className="brand-reports-pagination-container">
+                        <BrandPagination
+                            className="brand-reports-pagination"
+                            totalPages={totalPages}
+                            currentPage={currentPage}
+                            onPageChange={handlePageChange}
+                        />
+                    </div>
+                </>
+            ) : (
+                <p className="brand-reports-no-reports-message">There are no reports yet</p>
+            )}
         </div>
     );
 };
