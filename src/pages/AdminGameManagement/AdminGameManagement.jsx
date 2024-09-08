@@ -18,14 +18,14 @@ function AdminGameManagement() {
       name: "Trivia Blast", 
       type: "Trivia Quiz", 
       exchangable: "No", 
-      instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
+      instruction: "Each correct answer is worth 1000 points. If you pay late, every second will deduct 15 points. At the end of each question, the host will not repeat any questions. Each wrong answer is worth 0 points. The decision of the host is final.", 
       imageFile: ""
     },
     {id: 2, 
       name: "Lắc Xì", 
-      type: "Shake Phone", 
+      type: "Roll Dice", 
       exchangable: "Yes", 
-      instruction: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.", 
+      instruction: "You can shake the phone if it supports it otherwise you can press the button right on the screen", 
       imageFile: ""},
     ];
 
