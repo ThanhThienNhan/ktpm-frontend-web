@@ -15,7 +15,7 @@ function AddQuiz() {
         const fetchEventAndQuiz = async () => {
           try {
             // Fetch event data
-            const eventResponse = await fetch(`http://localhost:2999/brand/api/v1/event/${id}`);
+            const eventResponse = await fetch(`http://localhost/brand/api/v1/event/${id}`);
             const eventData = await eventResponse.json();
     
             if (eventData.ID_THUONGHIEU !== brandId) {
@@ -27,7 +27,7 @@ function AddQuiz() {
             setEventData(eventData);
     
             // Fetch existing quiz for the event
-            const quizResponse = await fetch(`http://localhost:2999/brand/api/v1/quiz/EventId/${id}`);
+            const quizResponse = await fetch(`http://localhost/brand/api/v1/quiz/EventId/${id}`);
             const quiz = await quizResponse.json();
             console.log("Quiz data", quiz);
     
@@ -88,12 +88,12 @@ function AddQuiz() {
     const handleSubmit = async () => {
         try {
             // Delete existing quiz for the event
-            await fetch(`http://localhost:2999/brand/api/v1/quiz/EventId/${id}`, {
+            await fetch(`http://localhost/brand/api/v1/quiz/EventId/${id}`, {
                 method: 'DELETE',
             });
 
             // Submit new quiz to the server
-            await fetch('http://localhost:2999/brand/api/v1/quiz', {
+            await fetch('http://localhost/brand/api/v1/quiz', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

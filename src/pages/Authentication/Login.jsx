@@ -12,7 +12,7 @@ const Login = () => {
     const password = document.querySelector("#login-password").value;
     try {
       const response = await fetch(
-        "http://localhost:2999/auth/v1/api/auth/login",
+        "http://localhost/auth/v1/api/auth/login",
         {
           credentials: "include",
           method: "POST",

@@ -28,7 +28,7 @@ const Register = () => {
 
         try {
             // Sign up user
-            const { data: userData } = await axios.post("http://localhost:2999/auth/v1/api/auth/signup-brand", userObj, {
+            const { data: userData } = await axios.post("http://localhost/auth/v1/api/auth/signup-brand", userObj, {
                 withCredentials: true,
                 headers: { "Content-Type": "application/json" }
             });
@@ -43,7 +43,7 @@ const Register = () => {
             };
 
             // Create brand
-            await axios.post("http://localhost:2999/brand/api/v1/brand", brandObj, {
+            await axios.post("http://localhost/brand/api/v1/brand", brandObj, {
                 headers: { 'Content-Type': 'application/json' }
             });
 

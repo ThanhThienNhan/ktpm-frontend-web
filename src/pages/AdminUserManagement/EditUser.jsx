@@ -26,7 +26,7 @@ export default function EditUser() {
   useEffect(() => {
     // Fetch data from API
     if (username) {
-      axios.get(`http://localhost:2999/user/v1/api/auth/users/info/${username}`)
+      axios.get(`http://localhost/user/v1/api/auth/users/info/${username}`)
         .then(response => {
           const userData = response.data;
           console.log("User data: ", userData)
@@ -39,7 +39,7 @@ export default function EditUser() {
             TRANGTHAI: userData.TRANGTHAI,
           });
           if(userData.AVATAR !== null && userData.AVATAR !== undefined && userData.AVATAR !== ""){
-            //axios.get(`http://localhost:2999/user/v1/api/auth/images/image/${avatar}`)
+            //axios.get(`http://localhost/user/v1/api/auth/images/image/${avatar}`)
             //.then(response => {
             //  const imageData = response.data;
             //  setImageFile(imageData.secure_url);
@@ -94,7 +94,7 @@ export default function EditUser() {
 
   const onSubmit = (values) => {
     const data = JSON.stringify({...values,AVATAR: imageFile});
-    axios.put(`http://localhost:2999/user/v1/api/auth/users/edit/${username}`, data, {
+    axios.put(`http://localhost/user/v1/api/auth/users/edit/${username}`, data, {
       headers: {
         'Content-Type': 'application/json'
       }

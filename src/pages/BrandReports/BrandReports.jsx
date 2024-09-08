@@ -14,7 +14,7 @@ const BrandReports = () => {
     useEffect(() => {
         // Fetch past events when the component mounts
         if (brandId) {
-            fetch(`http://localhost:2999/brand/api/v1/event/past/${brandId}`)
+            fetch(`http://localhost/brand/api/v1/event/past/${brandId}`)
                 .then(response => response.json())
                 .then(data => {
                     setEvents(data);

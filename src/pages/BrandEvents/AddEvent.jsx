@@ -32,7 +32,7 @@ const AddEvent = () => {
         }
 
         try {
-            const response = await axios.post('http://localhost:2999/brand/api/v1/event', formData, {
+            const response = await axios.post('http://localhost/brand/api/v1/event', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },

@@ -15,7 +15,7 @@ const BrandEvents = () => {
 
     useEffect(() => {
         if (brandId) {
-            fetch(`http://localhost:2999/brand/api/v1/event/coming/${brandId}`)
+            fetch(`http://localhost/brand/api/v1/event/coming/${brandId}`)
                 .then(response => response.json())
                 .then(data => {
                     setEvents(data);

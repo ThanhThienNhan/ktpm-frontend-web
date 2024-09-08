@@ -12,7 +12,7 @@ const ViewVouchersModal = ({ isOpen, onClose, eventId }) => {
       const fetchVouchers = async () => {
         try {
           console.log("Event ID:", eventId);
-          const response = await axios.get(`http://localhost:2999/brand/api/v1/voucher-event/event/${eventId}`);
+          const response = await axios.get(`http://localhost/brand/api/v1/voucher-event/event/${eventId}`);
           setVouchers(Array.isArray(response.data) ? response.data : []);
           setLoading(false);
         } catch (err) {

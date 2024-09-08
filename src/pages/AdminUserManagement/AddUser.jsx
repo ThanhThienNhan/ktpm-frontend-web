@@ -51,7 +51,7 @@ export default function AddUser() {
 
   const onSubmit = (values) => {
     const data = JSON.stringify({...values,AVATAR: avatar});
-    axios.post('http://localhost:2999/user/v1/api/auth/users/new', data, {
+    axios.post('http://localhost/user/v1/api/auth/users/new', data, {
       headers: {
         'Content-Type': 'application/json'
       }

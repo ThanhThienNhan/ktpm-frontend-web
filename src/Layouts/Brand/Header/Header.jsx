@@ -14,7 +14,7 @@ const Header = ({ userInfo, setUserInfo }) => {
 
     useEffect(() => {
         if (brandId) {
-            fetch("http://localhost:2999/brand/api/v1/brand/getBrandInfo", {
+            fetch("http://localhost/brand/api/v1/brand/getBrandInfo", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

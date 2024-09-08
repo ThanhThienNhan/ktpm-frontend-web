@@ -20,7 +20,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     //get players count
-    axios.get('http://localhost:2999/user/v1/api/auth/users/players-count')
+    axios.get('http://localhost/user/v1/api/auth/users/players-count')
     .then((response) => {
       setPlayerCount(response.data.count);
     })
@@ -29,7 +29,7 @@ function AdminDashboard() {
     });
 
     //get brands count
-    axios.get('http://localhost:2999/user/v1/api/auth/users/brands-count') // Replace with your Cloudinary cloud name
+    axios.get('http://localhost/user/v1/api/auth/users/brands-count') // Replace with your Cloudinary cloud name
     .then((response) => {
       setBrandCount(response.data.count);
     })
@@ -38,7 +38,7 @@ function AdminDashboard() {
     });
 
     //get events count
-    axios.get('http://localhost:2999/brand/api/v1/event/happening/count') // Replace with your Cloudinary cloud name
+    axios.get('http://localhost/brand/api/v1/event/happening/count') // Replace with your Cloudinary cloud name
     .then((response) => {
       setEventCount(response.data.count);
     })
@@ -56,7 +56,7 @@ function AdminDashboard() {
     };
     
     //get login data
-    axios.post('http://localhost:2999/auth/v1/api/auth/statistic', dateObject) // Replace with your Cloudinary cloud name
+    axios.post('http://localhost/auth/v1/api/auth/statistic', dateObject) // Replace with your Cloudinary cloud name
     .then((response) => {
       setLoginData(response.data.data);
     })
@@ -65,7 +65,7 @@ function AdminDashboard() {
     });
 
     //get top favorited events data
-    axios.get('http://localhost:2999/user/v1/api/auth/favorite/event/top4') // Replace with your Cloudinary cloud name
+    axios.get('http://localhost/user/v1/api/auth/favorite/event/top4') // Replace with your Cloudinary cloud name
     .then((response) => {
       setTopEvents(response.data);
       console.log(response.data);

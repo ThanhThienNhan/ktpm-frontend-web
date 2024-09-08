@@ -26,7 +26,7 @@ function BrandDetail() {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await fetch(`http://localhost:2999/brand/api/v1/event/${id}`);
+        const response = await fetch(`http://localhost/brand/api/v1/event/${id}`);
         const data = await response.json();
 
         if (data.ID_THUONGHIEU !== brandId) {
@@ -47,7 +47,7 @@ function BrandDetail() {
     const fetchVouchers = async () => {
       if (currentEvent) {
         try {
-          const response = await fetch(`http://localhost:2999/brand/api/v1/voucher-event/event/${id}`);
+          const response = await fetch(`http://localhost/brand/api/v1/voucher-event/event/${id}`);
           const data = await response.json();
           setVouchers(Array.isArray(data) ? data : []);
           const total = data.reduce((acc, voucher) => acc + (voucher.SOLUONGVOUCHER || 0), 0);
@@ -69,10 +69,10 @@ function BrandDetail() {
 
   const handleAddOrUpdateVouchers = async (newVouchers) => {
     try {
-      const response = await axios.post("http://localhost:2999/brand/api/v1/voucher-event", newVouchers);
+      const response = await axios.post("http://localhost/brand/api/v1/voucher-event", newVouchers);
       console.log("Response:", response.data);
 
-      const updatedResponse = await fetch(`http://localhost:2999/brand/api/v1/voucher-event/event/${id}`);
+      const updatedResponse = await fetch(`http://localhost/brand/api/v1/voucher-event/event/${id}`);
       const updatedData = await updatedResponse.json();
       setVouchers(Array.isArray(updatedData) ? updatedData : []);
       

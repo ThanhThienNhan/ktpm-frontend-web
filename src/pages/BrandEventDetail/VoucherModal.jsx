@@ -23,7 +23,7 @@ const VoucherModal = ({ isOpen, onClose, onSave, eventId, brandId }) => {
     if (isOpen && brandId) {
       const fetchVouchers = async () => {
         try {
-          const response = await axios.get(`http://localhost:2999/brand/api/v1/voucher/${brandId}`);
+          const response = await axios.get(`http://localhost/brand/api/v1/voucher/${brandId}`);
           setVouchers(Array.isArray(response.data) ? response.data : []);
           setLoading(false);
         } catch (err) {

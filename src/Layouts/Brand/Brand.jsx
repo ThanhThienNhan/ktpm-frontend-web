@@ -17,7 +17,7 @@ const Brand = () => {
     const fetchBrandId = async () => {
       if (userData) {
         try {
-          const response = await fetch(`http://localhost:2999/brand/api/v1/brand/getBrandId/${userData.ID_TTNGUOIDUNG}`);
+          const response = await fetch(`http://localhost/brand/api/v1/brand/getBrandId/${userData.ID_TTNGUOIDUNG}`);
           const data = await response.json();
           if (data) {
             setBrandId(data.ID_THUONGHIEU);
