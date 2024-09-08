@@ -55,3 +55,16 @@
     opacity: 0.75;
     margin-top: 10px;
 }
+
+.happening-badge {
+    background-color: #28a745;
+    color: white;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 8px;
+    text-align: center;
+    width: fit-content;
+    align-self: center;
+    font-weight: bold;
+}
+

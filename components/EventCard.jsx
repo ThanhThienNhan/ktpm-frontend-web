@@ -10,10 +10,12 @@ const formatDate = (dateString) => {
 const EventCard = ({ event, context }) => {
   const navigate = useNavigate();
   const now = moment(); // Current date and time
+  const startDate = moment.parseZone(event.TGBATDAU);
+  const endDate = moment.parseZone(event.TGKETTHUC);
+
+  const isHappening = now.isAfter(startDate) && now.isBefore(endDate);
 
   const handleCardClick = () => {
-    const endDate = moment.parseZone(event.TGKETTHUC); 
-
     if (endDate.isAfter(now)) {
       navigate(`/brand/event/${event.ID_SUKIEN}`); 
     } else {
@@ -31,6 +33,7 @@ const EventCard = ({ event, context }) => {
         <h3 className="event-card-name">{event.TENSUKIEN}</h3>
         <div className="event-card-type">Type: {event.LOAITROCHOI}</div>
       </div>
+      {isHappening && <div className="happening-badge">Happening</div>}
       <div className="event-card-dates">
         <div>Start: {formatDate(event.TGBATDAU)}</div>
         <div>End: {formatDate(event.TGKETTHUC)}</div>
